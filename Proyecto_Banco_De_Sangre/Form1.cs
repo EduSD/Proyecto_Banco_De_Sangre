@@ -16,5 +16,13 @@ namespace Proyecto_Banco_De_Sangre
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Secion.Text=="medico123")
+            {
+
+            }
+        }
     }
 }
