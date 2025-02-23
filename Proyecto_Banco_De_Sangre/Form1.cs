@@ -17,12 +17,14 @@ namespace Proyecto_Banco_De_Sangre
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void txtcode_TextChanged(object sender, EventArgs e)
         {
-            if (Secion.Text=="medico123")
-            {
 
-            }
+        }
+
+        private void btnentrar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
