@@ -14,14 +14,14 @@ namespace Proyecto_Banco_De_Sangre
     {
         private int intentos = 0;
         private const int maxIntentos = 4;
-        private const string codigoCorrecto = "1234"; // No se me ocurrió otra, como no tenemos base de momento así csm xd
+        
 
         public Form1()
         {
             InitializeComponent();
             btnentrar.Enabled = false;
             txtcode.TextChanged += txtcode_TextChanged;
-            btnentrar.Click += btnentrar_Click;
+           
         }
 
         private void txtcode_TextChanged(object sender, EventArgs e)
@@ -31,16 +31,21 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnentrar_Click(object sender, EventArgs e)
         {
-            if (txtcode.Text == codigoCorrecto)
+            if (txtcode.Text == "1234") //validacion para ingreso de usuario
             {
                 MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Registroscs frm = new Registroscs();
+                frm.Show();
+                this.Hide();
             }
-            else
+
+            else //Negativa  en caso de la contraseña estar mal
             {
                 intentos++;
-                if (intentos >= maxIntentos)
+                if (intentos >= maxIntentos) // validacion para determinar una cantidad de intentos 
                 {
-                    MessageBox.Show("Has excedido el número de intentos. Ni modo xD", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Has excedido el número de intentos.\n Favor de llamar a un supervisor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
                 }
                 else
