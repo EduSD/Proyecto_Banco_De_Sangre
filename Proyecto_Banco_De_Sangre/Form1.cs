@@ -14,14 +14,12 @@ namespace Proyecto_Banco_De_Sangre
     {
         private int intentos = 0;
         private const int maxIntentos = 4;
-        
 
         public Form1()
         {
             InitializeComponent();
             btnentrar.Enabled = false;
             txtcode.TextChanged += txtcode_TextChanged;
-           
         }
 
         private void txtcode_TextChanged(object sender, EventArgs e)
@@ -35,12 +33,11 @@ namespace Proyecto_Banco_De_Sangre
             {
                 MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Registroscs frm = new Registroscs();
+                Informes frm = new Informes(); // Cambiado a Informes
                 frm.Show();
                 this.Hide();
             }
-
-            else //Negativa  en caso de la contraseña estar mal
+            else //Negativa en caso de la contraseña estar mal
             {
                 intentos++;
                 if (intentos >= maxIntentos) // validacion para determinar una cantidad de intentos 
@@ -53,6 +50,11 @@ namespace Proyecto_Banco_De_Sangre
                     MessageBox.Show($"Estimado usuario, su código es incorrecto. Te quedan {maxIntentos - intentos} intentos. Sino recuerda su código vaya a RH por soporte para su código", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
