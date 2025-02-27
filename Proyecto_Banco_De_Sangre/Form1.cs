@@ -50,7 +50,7 @@ namespace Proyecto_Banco_De_Sangre
                 }
                 else
                 {
-                    MessageBox.Show($"Código incorrecto. Te quedan {maxIntentos - intentos} intentos. Sino recuerda su código vaya a RH por su carta de renuncia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Estimado usuario, su código es incorrecto. Te quedan {maxIntentos - intentos} intentos. Sino recuerda su código vaya a RH por soporte para su código", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }

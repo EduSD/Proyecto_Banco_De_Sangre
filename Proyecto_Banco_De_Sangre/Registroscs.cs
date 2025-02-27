@@ -15,8 +15,9 @@ namespace Proyecto_Banco_De_Sangre
     {
         DataTable dt = new DataTable();
         int id = 2;
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-
+        // string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        // Crear clase para conexión válida para computadora de Derio,  Yavé y PC
+        string conexionString = "Server=L402-M13;Database=banco_sangre;Trusted_Connection=True";
         public Registroscs()
         {
             InitializeComponent();
@@ -95,6 +96,11 @@ namespace Proyecto_Banco_De_Sangre
 
             // Actualizar el DataGridView
             CargarDatos();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

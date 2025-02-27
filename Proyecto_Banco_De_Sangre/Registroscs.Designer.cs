@@ -86,11 +86,12 @@ namespace Proyecto_Banco_De_Sangre
             this.eCronicaDataGridViewTextBoxColumn,
             this.fechaDataGridViewTextBoxColumn});
             this.dtw_Registro.DataSource = this.registrosBindingSource;
-            this.dtw_Registro.Location = new System.Drawing.Point(12, 213);
+            this.dtw_Registro.Location = new System.Drawing.Point(9, 173);
+            this.dtw_Registro.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dtw_Registro.Name = "dtw_Registro";
             this.dtw_Registro.RowHeadersWidth = 51;
             this.dtw_Registro.RowTemplate.Height = 24;
-            this.dtw_Registro.Size = new System.Drawing.Size(940, 260);
+            this.dtw_Registro.Size = new System.Drawing.Size(705, 211);
             this.dtw_Registro.TabIndex = 0;
             // 
             // iDDataGridViewTextBoxColumn
@@ -157,16 +158,18 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // txtnombre
             // 
-            this.txtnombre.Location = new System.Drawing.Point(25, 98);
+            this.txtnombre.Location = new System.Drawing.Point(19, 80);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(168, 22);
+            this.txtnombre.Size = new System.Drawing.Size(127, 20);
             this.txtnombre.TabIndex = 2;
             // 
             // txtedad
             // 
-            this.txtedad.Location = new System.Drawing.Point(250, 98);
+            this.txtedad.Location = new System.Drawing.Point(188, 80);
+            this.txtedad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtedad.Name = "txtedad";
-            this.txtedad.Size = new System.Drawing.Size(73, 22);
+            this.txtedad.Size = new System.Drawing.Size(56, 20);
             this.txtedad.TabIndex = 3;
             // 
             // txtsangre
@@ -181,17 +184,19 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.txtsangre.Location = new System.Drawing.Point(390, 96);
+            this.txtsangre.Location = new System.Drawing.Point(292, 78);
+            this.txtsangre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtsangre.Name = "txtsangre";
-            this.txtsangre.Size = new System.Drawing.Size(62, 24);
+            this.txtsangre.Size = new System.Drawing.Size(48, 21);
             this.txtsangre.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 58);
+            this.label1.Location = new System.Drawing.Point(16, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 17);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Nombre";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -199,35 +204,40 @@ namespace Proyecto_Banco_De_Sangre
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(250, 58);
+            this.label2.Location = new System.Drawing.Point(188, 47);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 17);
+            this.label2.Size = new System.Drawing.Size(32, 13);
             this.label2.TabIndex = 9;
             this.label2.Text = "Edad";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(390, 56);
+            this.label3.Location = new System.Drawing.Point(292, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 17);
+            this.label3.Size = new System.Drawing.Size(80, 13);
             this.label3.TabIndex = 10;
             this.label3.Text = "Tipo de Sangre";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(569, 54);
+            this.label4.Location = new System.Drawing.Point(427, 44);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 17);
+            this.label4.Size = new System.Drawing.Size(103, 13);
             this.label4.TabIndex = 11;
             this.label4.Text = "Enfermedad Cronica";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(757, 151);
+            this.button1.Location = new System.Drawing.Point(568, 123);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 40);
+            this.button1.Size = new System.Drawing.Size(76, 32);
             this.button1.TabIndex = 12;
             this.button1.Text = "Agregar";
             this.button1.UseVisualStyleBackColor = true;
@@ -239,16 +249,17 @@ namespace Proyecto_Banco_De_Sangre
             this.txtcronica.Items.AddRange(new object[] {
             "Si",
             "No"});
-            this.txtcronica.Location = new System.Drawing.Point(572, 98);
+            this.txtcronica.Location = new System.Drawing.Point(429, 80);
+            this.txtcronica.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtcronica.Name = "txtcronica";
-            this.txtcronica.Size = new System.Drawing.Size(61, 24);
+            this.txtcronica.Size = new System.Drawing.Size(47, 21);
             this.txtcronica.TabIndex = 13;
             // 
             // Registroscs
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(964, 513);
+            this.ClientSize = new System.Drawing.Size(723, 417);
             this.Controls.Add(this.txtcronica);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
@@ -259,6 +270,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Controls.Add(this.txtedad);
             this.Controls.Add(this.txtnombre);
             this.Controls.Add(this.dtw_Registro);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Registroscs";
             this.Text = "Registroscs";
             this.Load += new System.EventHandler(this.Registroscs_Load);
