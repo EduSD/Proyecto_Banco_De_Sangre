@@ -70,6 +70,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Controls.Add(this.label1);
             this.Name = "Informes";
             this.Text = "Informes";
+            this.Load += new System.EventHandler(this.Informes_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

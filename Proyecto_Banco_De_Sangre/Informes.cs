@@ -75,6 +75,11 @@ namespace Proyecto_Banco_De_Sangre
         {
 
         }
+
+        private void Informes_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // Aqui no se como quieres mostrar el informe con sangre de grupos compartidos o 1x1

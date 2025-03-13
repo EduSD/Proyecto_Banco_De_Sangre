@@ -9,22 +9,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+using static Proyecto_Banco_De_Sangre.Conexinon1;
+
 namespace Proyecto_Banco_De_Sangre
 {
+    
+
     public partial class Registroscs : Form
     {
+
         DataTable dt = new DataTable();
-        int id = 2;
-        // string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-        // Crear clase para conexión válida para computadora de Derio,  Yavé y PC
-        string conexionString = "Server=L402-M13;Database=banco_sangre;Trusted_Connection=True";
+        int id=1;
+        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        
+
         public Registroscs()
         {
             InitializeComponent();
           
         }
+        
         private void CargarDatos()
         {
+            
+            
             DataTable dt = new DataTable();
             using (SqlConnection conexion = new SqlConnection(conexionString))
             {
@@ -46,12 +54,7 @@ namespace Proyecto_Banco_De_Sangre
         }
 
         private void Registroscs_Load(object sender, EventArgs e)
-        {/*
-            // TODO: esta línea de código carga datos en la tabla 'banco_sangreDataSet.Registros' Puede moverla o quitarla según sea necesario.
-            this.registrosTableAdapter.Fill(this.banco_sangreDataSet.Registros);
-            // TODO: esta línea de código carga datos en la tabla 'dATOSDataSet.ALUMNOS' Puede moverla o quitarla según sea necesario.
-            this.aLUMNOSTableAdapter.Fill(this.dATOSDataSet.ALUMNOS);*/
-
+        {
             dt.Columns.Add("ID");
             dt.Columns.Add("Nombre");
             dt.Columns.Add("Edad");
@@ -94,7 +97,7 @@ namespace Proyecto_Banco_De_Sangre
                 }
             }
 
-            // Actualizar el DataGridView
+            // Actualizar la tabla 
             CargarDatos();
         }
 
@@ -102,5 +105,20 @@ namespace Proyecto_Banco_De_Sangre
         {
 
         }
+
+        private void consulta_Click(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            Informes frm = new Informes(); // Cambiado a Informes
+            frm.Show();
+            this.Hide();
+        }
     }
-}
+    }
+

@@ -33,7 +33,7 @@ namespace Proyecto_Banco_De_Sangre
             {
                 MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Informes frm = new Informes(); // Cambiado a Informes
+                Registroscs frm = new Registroscs(); // Cambiado a Informes
                 frm.Show();
                 this.Hide();
             }
