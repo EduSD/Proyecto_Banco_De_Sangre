@@ -200,7 +200,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Nombre";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            
             // 
             // label2
             // 
@@ -228,7 +228,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label4.Size = new System.Drawing.Size(137, 17);
             this.label4.TabIndex = 11;
             this.label4.Text = "Enfermedad Cronica";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            
             // 
             // button1
             // 
@@ -261,7 +261,7 @@ namespace Proyecto_Banco_De_Sangre
             this.consulta.TabIndex = 14;
             this.consulta.Text = "Consultar";
             this.consulta.UseVisualStyleBackColor = true;
-            this.consulta.Click += new System.EventHandler(this.consulta_Click);
+            
             // 
             // button2
             // 
