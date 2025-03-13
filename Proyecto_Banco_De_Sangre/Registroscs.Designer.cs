@@ -55,10 +55,10 @@ namespace Proyecto_Banco_De_Sangre
             this.txtcronica = new System.Windows.Forms.ComboBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.txtlitros = new System.Windows.Forms.Label();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.txtlitros2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -84,7 +84,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.dtw_Registro.AllowUserToOrderColumns = true;
             this.dtw_Registro.AutoGenerateColumns = false;
-            this.dtw_Registro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtw_Registro.ColumnHeadersHeight = 29;
             this.dtw_Registro.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn,
             this.nombreDataGridViewTextBoxColumn,
@@ -107,6 +107,7 @@ namespace Proyecto_Banco_De_Sangre
             this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
             this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
             this.iDDataGridViewTextBoxColumn.Width = 125;
             // 
             // nombreDataGridViewTextBoxColumn
@@ -128,7 +129,7 @@ namespace Proyecto_Banco_De_Sangre
             // tSangreDataGridViewTextBoxColumn
             // 
             this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
             this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
             this.tSangreDataGridViewTextBoxColumn.Width = 125;
@@ -136,7 +137,7 @@ namespace Proyecto_Banco_De_Sangre
             // eCronicaDataGridViewTextBoxColumn
             // 
             this.eCronicaDataGridViewTextBoxColumn.DataPropertyName = "E_Cronica";
-            this.eCronicaDataGridViewTextBoxColumn.HeaderText = "E_Cronica";
+            this.eCronicaDataGridViewTextBoxColumn.HeaderText = "Enfermedad Crónica";
             this.eCronicaDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.eCronicaDataGridViewTextBoxColumn.Name = "eCronicaDataGridViewTextBoxColumn";
             this.eCronicaDataGridViewTextBoxColumn.Width = 125;
@@ -264,6 +265,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnEliminar.TabIndex = 14;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // button2
             // 
@@ -274,18 +276,6 @@ namespace Proyecto_Banco_De_Sangre
             this.button2.Text = "Reportes";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.btnReportes_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Si",
-            "No"});
-            this.comboBox1.Location = new System.Drawing.Point(486, 110);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(57, 24);
-            this.comboBox1.TabIndex = 17;
             // 
             // txtlitros
             // 
@@ -304,6 +294,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnConsultar.TabIndex = 18;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnModificar
             // 
@@ -313,6 +304,15 @@ namespace Proyecto_Banco_De_Sangre
             this.btnModificar.TabIndex = 19;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtlitros2
+            // 
+            this.txtlitros2.Location = new System.Drawing.Point(497, 110);
+            this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtlitros2.Name = "txtlitros2";
+            this.txtlitros2.Size = new System.Drawing.Size(46, 22);
+            this.txtlitros2.TabIndex = 20;
             // 
             // Registroscs
             // 
@@ -320,9 +320,9 @@ namespace Proyecto_Banco_De_Sangre
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(964, 513);
+            this.Controls.Add(this.txtlitros2);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnConsultar);
-            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtlitros);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnEliminar);
@@ -358,12 +358,6 @@ namespace Proyecto_Banco_De_Sangre
         private banco_sangreDataSet banco_sangreDataSet;
         private System.Windows.Forms.BindingSource registrosBindingSource;
         private banco_sangreDataSetTableAdapters.RegistrosTableAdapter registrosTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn edadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eCronicaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox txtnombre;
         private System.Windows.Forms.TextBox txtedad;
         private System.Windows.Forms.ComboBox txtsangre;
@@ -375,9 +369,15 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.ComboBox txtcronica;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label txtlitros;
         private System.Windows.Forms.Button btnConsultar;
         private System.Windows.Forms.Button btnModificar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn edadDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eCronicaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox txtlitros2;
     }
 }
