@@ -29,7 +29,7 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnentrar_Click(object sender, EventArgs e)
         {
-            if (txtcode.Text == "1234") //validacion para ingreso de usuario
+            if (txtcode.Text == "1234") // Validación para ingreso de usuario
             {
                 MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
