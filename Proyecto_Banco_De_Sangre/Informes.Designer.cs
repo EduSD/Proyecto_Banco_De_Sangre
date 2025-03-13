@@ -37,7 +37,7 @@ namespace Proyecto_Banco_De_Sangre
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(576, 277);
+            this.label1.Location = new System.Drawing.Point(189, 178);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 17);
             this.label1.TabIndex = 0;
@@ -55,7 +55,7 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(511, 215);
+            this.comboBox1.Location = new System.Drawing.Point(174, 210);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 1;

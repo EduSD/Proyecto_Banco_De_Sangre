@@ -51,10 +51,5 @@ namespace Proyecto_Banco_De_Sangre
                 }
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

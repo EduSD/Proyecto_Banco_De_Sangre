@@ -107,7 +107,6 @@ namespace Proyecto_Banco_De_Sangre
             this.Controls.Add(this.lblusuario);
             this.Name = "Form1";
             this.Text = "Inicio de Sesión";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
