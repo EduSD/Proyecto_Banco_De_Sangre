@@ -51,6 +51,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>banco_sangreDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="banco_sangreDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>banco_sangreDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Conexinon1.cs" />
     <Compile Include="DATOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -105,6 +110,17 @@
     </None>
     <None Include="banco_sangreDataSet.xss">
       <DependentUpon>banco_sangreDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="banco_sangreDataSet1.xsc">
+      <DependentUpon>banco_sangreDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="banco_sangreDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>banco_sangreDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="banco_sangreDataSet1.xss">
+      <DependentUpon>banco_sangreDataSet1.xsd</DependentUpon>
     </None>
     <None Include="DATOSDataSet.xsc">
       <DependentUpon>DATOSDataSet.xsd</DependentUpon>
