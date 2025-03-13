@@ -173,7 +173,15 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // txtnombre
             // 
+            this.txtnombre.Location = new System.Drawing.Point(18, 73);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnombre.Location = new System.Drawing.Point(28, 75);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtnombre.Location = new System.Drawing.Point(25, 98);
+=========
+            this.txtnombre.Location = new System.Drawing.Point(18, 73);
+>>>>>>>>> Temporary merge branch 2
             this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnombre.Name = "txtnombre";
             this.txtnombre.Size = new System.Drawing.Size(168, 22);
@@ -193,13 +201,17 @@ namespace Proyecto_Banco_De_Sangre
             this.txtsangre.Items.AddRange(new object[] {
             "A+",
             "A-",
-            "B+",
+            this.txtsangre.Location = new System.Drawing.Point(382, 71);
             "B-",
             "AB+",
             "AB-",
             "O+",
             "O-"});
-            this.txtsangre.Location = new System.Drawing.Point(335, 71);
+<<<<<<<<< Temporary merge branch 1
+            this.txtsangre.Location = new System.Drawing.Point(389, 96);
+=========
+            this.label1.Location = new System.Drawing.Point(58, 29);
+>>>>>>>>> Temporary merge branch 2
             this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsangre.Name = "txtsangre";
             this.txtsangre.Size = new System.Drawing.Size(103, 24);
@@ -207,26 +219,39 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(84, 33);
+            this.label2.Location = new System.Drawing.Point(244, 33);
+<<<<<<<<< Temporary merge branch 1
+            this.label1.Location = new System.Drawing.Point(21, 58);
+            this.label1.Location = new System.Drawing.Point(65, 54);
+=========
+            this.label1.Location = new System.Drawing.Point(58, 29);
+>>>>>>>>> Temporary merge branch 2
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 17);
-            this.label1.TabIndex = 8;
+            this.label3.Location = new System.Drawing.Point(382, 32);
             this.label1.Text = "Nombre";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(250, 33);
+<<<<<<<<< Temporary merge branch 1
+            this.label2.Location = new System.Drawing.Point(251, 58);
+=========
+            this.label2.Location = new System.Drawing.Point(244, 33);
+>>>>>>>>> Temporary merge branch 2
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "Edad";
             // 
             // label3
-            // 
+            this.button1.Location = new System.Drawing.Point(694, 110);
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(332, 33);
+<<<<<<<<< Temporary merge branch 1
+            this.label3.Location = new System.Drawing.Point(389, 57);
+=========
+            this.label3.Location = new System.Drawing.Point(382, 32);
+>>>>>>>>> Temporary merge branch 2
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 17);
             this.label3.TabIndex = 10;
@@ -235,7 +260,7 @@ namespace Proyecto_Banco_De_Sangre
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(467, 33);
+            this.txtcronica.Location = new System.Drawing.Point(565, 73);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(137, 17);
             this.label4.TabIndex = 11;
@@ -243,7 +268,11 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(637, 63);
+<<<<<<<<< Temporary merge branch 1
+            this.button1.Location = new System.Drawing.Point(699, 151);
+=========
+            this.button1.Location = new System.Drawing.Point(694, 110);
+>>>>>>>>> Temporary merge branch 2
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 39);
@@ -258,7 +287,11 @@ namespace Proyecto_Banco_De_Sangre
             this.txtcronica.Items.AddRange(new object[] {
             "Si",
             "No"});
-            this.txtcronica.Location = new System.Drawing.Point(470, 71);
+<<<<<<<<< Temporary merge branch 1
+            this.txtcronica.Location = new System.Drawing.Point(572, 98);
+=========
+            this.txtcronica.Location = new System.Drawing.Point(565, 73);
+>>>>>>>>> Temporary merge branch 2
             this.txtcronica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtcronica.Name = "txtcronica";
             this.txtcronica.Size = new System.Drawing.Size(134, 24);
