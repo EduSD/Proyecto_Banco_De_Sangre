@@ -24,8 +24,10 @@ namespace Proyecto_Banco_De_Sangre
 
         }
 
+
+
         //carag en la base de datos
-        
+
 
         private void CargarDatos()
         {
@@ -34,8 +36,8 @@ namespace Proyecto_Banco_De_Sangre
             using (SqlConnection conexion = new SqlConnection(conexionString))
             {
                 conexion.Open();
-                string query = "INSERT INTO Sangre (T_Sangre, F_RH, Fecha_C, Litros) " +
-               "SELECT T_Sangre,FROM Registros";
+
+                string query = "Select * from Sangre";
 
 
                 using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
@@ -50,7 +52,7 @@ namespace Proyecto_Banco_De_Sangre
         }
 
         private void InitializeCustomComponents()
-        {
+        {/*
             // Agregar DateTimePicker
             DateTimePicker dateTimePicker = new DateTimePicker();
             dateTimePicker.Location = new Point(10, 10); // Ajusta la ubicación según sea necesario
@@ -68,6 +70,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Controls.Add(comboBox);
 
             label2.Text = DateTime.Today.ToString("dd/MM/yyyy");
+            */
 
         }
 
@@ -120,10 +123,6 @@ namespace Proyecto_Banco_De_Sangre
 
         private void Informes_Load_1(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'banco_sangreDataSet1.Sangre' Puede moverla o quitarla según sea necesario.
-            this.sangreTableAdapter.Fill(this.banco_sangreDataSet1.Sangre);
-            // TODO: esta línea de código carga datos en la tabla 'banco_sangreDataSet.Registros' Puede moverla o quitarla según sea necesario.
-            this.registrosTableAdapter.Fill(this.banco_sangreDataSet.Registros);
 
         }
 
@@ -149,8 +148,12 @@ namespace Proyecto_Banco_De_Sangre
                         {
                             da.Fill(dt);
                         }
+                      
+
                     }
+
                 }
+
 
                 dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
             }
@@ -201,6 +204,11 @@ namespace Proyecto_Banco_De_Sangre
                 // Filtrar registros por rango de fechas pero se platica después serian 7 dias, 15 dias o 30 dias por ejemplo
                 return registros.Where(r => r.Fecha >= startDate && r.Fecha <= endDate).ToList();
             }
+        }
+
+        private void dtw_Informes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 } 
