@@ -51,6 +51,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>banco_sangreDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Conexinon1.cs" />
     <Compile Include="DATOSDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
