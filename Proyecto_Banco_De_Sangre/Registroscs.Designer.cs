@@ -30,7 +30,6 @@ namespace Proyecto_Banco_De_Sangre
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registroscs));
             this.dATOSDataSet = new Proyecto_Banco_De_Sangre.DATOSDataSet();
             this.aLUMNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.aLUMNOSTableAdapter = new Proyecto_Banco_De_Sangre.DATOSDataSetTableAdapters.ALUMNOSTableAdapter();
@@ -264,6 +263,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnEliminar.TabIndex = 14;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // button2
             // 
@@ -318,7 +318,6 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(964, 513);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnConsultar);
