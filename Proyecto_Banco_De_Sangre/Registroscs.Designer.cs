@@ -34,6 +34,12 @@ namespace Proyecto_Banco_De_Sangre
             this.aLUMNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.aLUMNOSTableAdapter = new Proyecto_Banco_De_Sangre.DATOSDataSetTableAdapters.ALUMNOSTableAdapter();
             this.dtw_Registro = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eCronicaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.registrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet = new Proyecto_Banco_De_Sangre.banco_sangreDataSet();
             this.registrosTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSetTableAdapters.RegistrosTableAdapter();
@@ -48,12 +54,6 @@ namespace Proyecto_Banco_De_Sangre
             this.txtcronica = new System.Windows.Forms.ComboBox();
             this.consulta = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eCronicaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -93,8 +93,56 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Registro.Name = "dtw_Registro";
             this.dtw_Registro.RowHeadersWidth = 51;
             this.dtw_Registro.RowTemplate.Height = 24;
-            this.dtw_Registro.Size = new System.Drawing.Size(1086, 260);
+            this.dtw_Registro.Size = new System.Drawing.Size(940, 260);
             this.dtw_Registro.TabIndex = 0;
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
+            this.nombreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // edadDataGridViewTextBoxColumn
+            // 
+            this.edadDataGridViewTextBoxColumn.DataPropertyName = "Edad";
+            this.edadDataGridViewTextBoxColumn.HeaderText = "Edad";
+            this.edadDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.edadDataGridViewTextBoxColumn.Name = "edadDataGridViewTextBoxColumn";
+            this.edadDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // eCronicaDataGridViewTextBoxColumn
+            // 
+            this.eCronicaDataGridViewTextBoxColumn.DataPropertyName = "E_Cronica";
+            this.eCronicaDataGridViewTextBoxColumn.HeaderText = "E_Cronica";
+            this.eCronicaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.eCronicaDataGridViewTextBoxColumn.Name = "eCronicaDataGridViewTextBoxColumn";
+            this.eCronicaDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fechaDataGridViewTextBoxColumn
+            // 
+            this.fechaDataGridViewTextBoxColumn.DataPropertyName = "Fecha";
+            this.fechaDataGridViewTextBoxColumn.HeaderText = "Fecha";
+            this.fechaDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fechaDataGridViewTextBoxColumn.Name = "fechaDataGridViewTextBoxColumn";
+            this.fechaDataGridViewTextBoxColumn.Width = 125;
             // 
             // registrosBindingSource
             // 
@@ -152,6 +200,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label1.Size = new System.Drawing.Size(58, 17);
             this.label1.TabIndex = 8;
             this.label1.Text = "Nombre";
+            
             // 
             // label2
             // 
@@ -179,10 +228,11 @@ namespace Proyecto_Banco_De_Sangre
             this.label4.Size = new System.Drawing.Size(137, 17);
             this.label4.TabIndex = 11;
             this.label4.Text = "Enfermedad Cronica";
+            
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(861, 128);
+            this.button1.Location = new System.Drawing.Point(694, 110);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(101, 39);
@@ -205,12 +255,13 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // consulta
             // 
-            this.consulta.Location = new System.Drawing.Point(994, 128);
+            this.consulta.Location = new System.Drawing.Point(827, 110);
             this.consulta.Name = "consulta";
             this.consulta.Size = new System.Drawing.Size(98, 39);
             this.consulta.TabIndex = 14;
             this.consulta.Text = "Consultar";
             this.consulta.UseVisualStyleBackColor = true;
+            
             // 
             // button2
             // 
@@ -222,59 +273,11 @@ namespace Proyecto_Banco_De_Sangre
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre";
-            this.nombreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            this.nombreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // edadDataGridViewTextBoxColumn
-            // 
-            this.edadDataGridViewTextBoxColumn.DataPropertyName = "Edad";
-            this.edadDataGridViewTextBoxColumn.HeaderText = "Edad";
-            this.edadDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.edadDataGridViewTextBoxColumn.Name = "edadDataGridViewTextBoxColumn";
-            this.edadDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // tSangreDataGridViewTextBoxColumn
-            // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // eCronicaDataGridViewTextBoxColumn
-            // 
-            this.eCronicaDataGridViewTextBoxColumn.DataPropertyName = "E_Cronica";
-            this.eCronicaDataGridViewTextBoxColumn.HeaderText = "E_Cronica";
-            this.eCronicaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.eCronicaDataGridViewTextBoxColumn.Name = "eCronicaDataGridViewTextBoxColumn";
-            this.eCronicaDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // fechaDataGridViewTextBoxColumn
-            // 
-            this.fechaDataGridViewTextBoxColumn.DataPropertyName = "Fecha";
-            this.fechaDataGridViewTextBoxColumn.HeaderText = "Fecha";
-            this.fechaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fechaDataGridViewTextBoxColumn.Name = "fechaDataGridViewTextBoxColumn";
-            this.fechaDataGridViewTextBoxColumn.Width = 125;
-            // 
             // Registroscs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1104, 513);
+            this.ClientSize = new System.Drawing.Size(964, 513);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.consulta);
             this.Controls.Add(this.txtcronica);
@@ -309,6 +312,12 @@ namespace Proyecto_Banco_De_Sangre
         private banco_sangreDataSet banco_sangreDataSet;
         private System.Windows.Forms.BindingSource registrosBindingSource;
         private banco_sangreDataSetTableAdapters.RegistrosTableAdapter registrosTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn edadDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eCronicaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox txtnombre;
         private System.Windows.Forms.TextBox txtedad;
         private System.Windows.Forms.ComboBox txtsangre;
@@ -320,11 +329,5 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.ComboBox txtcronica;
         private System.Windows.Forms.Button consulta;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn edadDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eCronicaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
     }
 }
