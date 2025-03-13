@@ -35,25 +35,26 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
+            this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
             this.bancosangreDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet = new Proyecto_Banco_De_Sangre.banco_sangreDataSet();
             this.registrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.registrosTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSetTableAdapters.RegistrosTableAdapter();
             this.registrosBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
-            this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sangreTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1TableAdapters.SangreTableAdapter();
+            this.Litrostotales = new System.Windows.Forms.Label();
             this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fRHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fechaCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.litrosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bancosangreDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -104,12 +105,23 @@ namespace Proyecto_Banco_De_Sangre
             this.fechaCDataGridViewTextBoxColumn,
             this.litrosDataGridViewTextBoxColumn});
             this.dtw_Informes.DataSource = this.sangreBindingSource;
-            this.dtw_Informes.Location = new System.Drawing.Point(106, 233);
+            this.dtw_Informes.Location = new System.Drawing.Point(152, 325);
             this.dtw_Informes.Name = "dtw_Informes";
             this.dtw_Informes.RowHeadersWidth = 51;
             this.dtw_Informes.RowTemplate.Height = 24;
             this.dtw_Informes.Size = new System.Drawing.Size(933, 319);
             this.dtw_Informes.TabIndex = 3;
+            this.dtw_Informes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtw_Informes_CellContentClick);
+            // 
+            // sangreBindingSource
+            // 
+            this.sangreBindingSource.DataMember = "Sangre";
+            this.sangreBindingSource.DataSource = this.banco_sangreDataSet1;
+            // 
+            // banco_sangreDataSet1
+            // 
+            this.banco_sangreDataSet1.DataSetName = "banco_sangreDataSet1";
+            this.banco_sangreDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // bancosangreDataSetBindingSource
             // 
@@ -135,19 +147,18 @@ namespace Proyecto_Banco_De_Sangre
             this.registrosBindingSource1.DataMember = "Registros";
             this.registrosBindingSource1.DataSource = this.banco_sangreDataSet;
             // 
-            // banco_sangreDataSet1
-            // 
-            this.banco_sangreDataSet1.DataSetName = "banco_sangreDataSet1";
-            this.banco_sangreDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sangreBindingSource
-            // 
-            this.sangreBindingSource.DataMember = "Sangre";
-            this.sangreBindingSource.DataSource = this.banco_sangreDataSet1;
-            // 
             // sangreTableAdapter
             // 
             this.sangreTableAdapter.ClearBeforeFill = true;
+            // 
+            // Litrostotales
+            // 
+            this.Litrostotales.AutoSize = true;
+            this.Litrostotales.Location = new System.Drawing.Point(623, 282);
+            this.Litrostotales.Name = "Litrostotales";
+            this.Litrostotales.Size = new System.Drawing.Size(28, 17);
+            this.Litrostotales.TabIndex = 4;
+            this.Litrostotales.Text = "     ";
             // 
             // tSangreDataGridViewTextBoxColumn
             // 
@@ -171,6 +182,7 @@ namespace Proyecto_Banco_De_Sangre
             this.fechaCDataGridViewTextBoxColumn.HeaderText = "Fecha_C";
             this.fechaCDataGridViewTextBoxColumn.MinimumWidth = 6;
             this.fechaCDataGridViewTextBoxColumn.Name = "fechaCDataGridViewTextBoxColumn";
+            this.fechaCDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.fechaCDataGridViewTextBoxColumn.Width = 125;
             // 
             // litrosDataGridViewTextBoxColumn
@@ -187,6 +199,7 @@ namespace Proyecto_Banco_De_Sangre
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1279, 724);
+            this.Controls.Add(this.Litrostotales);
             this.Controls.Add(this.dtw_Informes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
@@ -195,12 +208,12 @@ namespace Proyecto_Banco_De_Sangre
             this.Text = "Informes";
             this.Load += new System.EventHandler(this.Informes_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bancosangreDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,6 +233,7 @@ namespace Proyecto_Banco_De_Sangre
         private banco_sangreDataSet1 banco_sangreDataSet1;
         private System.Windows.Forms.BindingSource sangreBindingSource;
         private banco_sangreDataSet1TableAdapters.SangreTableAdapter sangreTableAdapter;
+        private System.Windows.Forms.Label Litrostotales;
         private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fRHDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCDataGridViewTextBoxColumn;
