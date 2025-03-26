@@ -13,8 +13,8 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Registroscs : Form
     {
         DataTable dt = new DataTable();
-        int id = 2;
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        int id = 4;
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         public Registroscs()
         {
@@ -38,9 +38,10 @@ namespace Proyecto_Banco_De_Sangre
             dt.Columns.Add("ID");
             dt.Columns.Add("Nombre");
             dt.Columns.Add("Edad");
-            dt.Columns.Add("Sangre");
+            dt.Columns.Add("T_Sangre");
             dt.Columns.Add("Crónica");
             dt.Columns.Add("Fecha");
+            dt.Columns.Add("Litros");
             dt.Columns.Add("Estado");
             dt.Columns.Add("DiasRestantes");
             dtw_Registro.DataSource = dt;
@@ -53,9 +54,9 @@ namespace Proyecto_Banco_De_Sangre
                 string nombreDonante = txtnombre.Text;
                 int litrosDonados = int.Parse(txtlitros2.Text);
                 // Aquí validamos los "litros" a donar
-                if (litrosDonados > 0.5)
+                if (litrosDonados > 2)
                 {
-                    MessageBox.Show("Recuerda que los pacientes n puedes donar más de 0.5 litros de sangre por donación. Por favor, verifica la cantidad ingresada.");
+                    MessageBox.Show("Recuerda que los pacientes n puedes donar más de 2 litros de sangre por donación. Por favor, verifica la cantidad ingresada.");
                     return;
                 }
                 // Validación del sistema, en busca de donaciones previas
@@ -67,7 +68,7 @@ namespace Proyecto_Banco_De_Sangre
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Registros (ID, Nombre, Edad, T_Sangre, E_Cronica, Fecha, Litros, Estado, S_Caducidad) VALUES (@ID, @Nombre, @Edad, @Sangre, @Cronica, @Fecha, @Litros, @Estado, @S_Caducidad)";
+                    string query = "INSERT INTO Registros (ID, Nombre, Edad, T_Sangre, E_Cronica, Fecha, Litros) VALUES (@ID, @Nombre, @Edad, @Sangre, @Cronica, @Fecha, @Litros)";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@ID", id++);
@@ -77,8 +78,8 @@ namespace Proyecto_Banco_De_Sangre
                         cmd.Parameters.AddWithValue("@Cronica", txtcronica.Text);
                         cmd.Parameters.AddWithValue("@Fecha", DateTime.Today);
                         cmd.Parameters.AddWithValue("@Litros", litrosDonados);
-                        cmd.Parameters.AddWithValue("@Estado", "Donado");
-                        cmd.Parameters.AddWithValue("@S_Caducidad", DateTime.Today.AddDays(42));
+                     /*   cmd.Parameters.AddWithValue("@Estado", "Donado");
+                        cmd.Parameters.AddWithValue("@S_Caducidad", DateTime.Today.AddDays(42));*/
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -138,7 +139,7 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            Informes frm = new Informes(); // Cambiar a form de Informes
+            Informes frm = new Informes(); // Cambiar a formulario de Informes
             frm.Show();
             this.Hide();
         }

@@ -15,7 +15,7 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Informes : Form
     {
         DataTable dt = new DataTable();
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
 
         public Informes()
         {
@@ -123,7 +123,8 @@ namespace Proyecto_Banco_De_Sangre
 
         private void Informes_Load_1(object sender, EventArgs e)
         {
-
+            CargarDatos();
+            label2.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -209,6 +210,13 @@ namespace Proyecto_Banco_De_Sangre
         private void dtw_Informes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Registroscs frm = new Registroscs(); 
+            frm.Show();
+            this.Hide();
         }
     }
 } 
