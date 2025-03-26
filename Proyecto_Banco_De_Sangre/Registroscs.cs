@@ -13,9 +13,10 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Registroscs : Form
     {
         DataTable dt = new DataTable();
-        int id = 2;
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        int id = 4;
+        //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         public Registroscs()
         {
             InitializeComponent();
@@ -36,13 +37,11 @@ namespace Proyecto_Banco_De_Sangre
         private void Registroscs_Load(object sender, EventArgs e)
         {
             dt.Columns.Add("ID");
-            dt.Columns.Add("Nombre");
-            dt.Columns.Add("Edad");
-            dt.Columns.Add("Sangre");
-            dt.Columns.Add("Crónica");
-            dt.Columns.Add("Fecha");
-            dt.Columns.Add("Estado");
-            dt.Columns.Add("DiasRestantes");
+            dt.Columns.Add("NOMBRE");
+            dt.Columns.Add("EDAD");
+            dt.Columns.Add("T_SANGRE");
+            dt.Columns.Add("MILILITROS_D");
+            dt.Columns.Add("FECHA_D");
             dtw_Registro.DataSource = dt;
             CargarDatos();
         }
@@ -53,9 +52,9 @@ namespace Proyecto_Banco_De_Sangre
                 string nombreDonante = txtnombre.Text;
                 int litrosDonados = int.Parse(txtlitros2.Text);
                 // Aquí validamos los "litros" a donar
-                if (litrosDonados > 0.5)
+                if (litrosDonados > 2)
                 {
-                    MessageBox.Show("Recuerda que los pacientes n puedes donar más de 0.5 litros de sangre por donación. Por favor, verifica la cantidad ingresada.");
+                    MessageBox.Show("Recuerda que los pacientes n puedes donar más de 2 litros de sangre por donación. Por favor, verifica la cantidad ingresada.");
                     return;
                 }
                 // Validación del sistema, en busca de donaciones previas
@@ -67,18 +66,17 @@ namespace Proyecto_Banco_De_Sangre
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Registros (ID, Nombre, Edad, T_Sangre, E_Cronica, Fecha, Litros, Estado, S_Caducidad) VALUES (@ID, @Nombre, @Edad, @Sangre, @Cronica, @Fecha, @Litros, @Estado, @S_Caducidad)";
+                    string query = "INSERT INTO Registros (ID, NOMBRE, EDAD, T_SANGRE, MILILITROS, FECHA_D,) VALUES (@ID, @NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS, @FECHA_D)";
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@ID", id++);
                         cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
                         cmd.Parameters.AddWithValue("@Edad", int.Parse(txtedad.Text));
                         cmd.Parameters.AddWithValue("@Sangre", txtsangre.Text);
-                        cmd.Parameters.AddWithValue("@Cronica", txtcronica.Text);
                         cmd.Parameters.AddWithValue("@Fecha", DateTime.Today);
                         cmd.Parameters.AddWithValue("@Litros", litrosDonados);
-                        cmd.Parameters.AddWithValue("@Estado", "Donado");
-                        cmd.Parameters.AddWithValue("@S_Caducidad", DateTime.Today.AddDays(42));
+                     /*   cmd.Parameters.AddWithValue("@Estado", "Donado");
+                        cmd.Parameters.AddWithValue("@S_Caducidad", DateTime.Today.AddDays(42));*/
                         cmd.ExecuteNonQuery();
                     }
                 }
@@ -138,7 +136,7 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            Informes frm = new Informes(); // Cambiar a form de Informes
+            Informes frm = new Informes(); // Cambiar a formulario de Informes
             frm.Show();
             this.Hide();
         }
@@ -269,7 +267,6 @@ namespace Proyecto_Banco_De_Sangre
                 string nombre = txtnombre.Text;
                 string edad = txtedad.Text;
                 string sangre = txtsangre.Text;
-                string cronica = txtcronica.Text;
                 string litros = txtlitros2.Text;
                 // Crear la consulta SQL dinámica
                 string query = "SELECT * FROM Registros WHERE 1 = 1";
@@ -285,10 +282,7 @@ namespace Proyecto_Banco_De_Sangre
                 {
                     query += " AND T_Sangre LIKE @Sangre"; // Cambio a LIKE para búsqueda parcial
                 }
-                if (!string.IsNullOrEmpty(cronica))
-                {
-                    query += " AND E_Cronica LIKE @Cronica"; // Cambio a LIKE para búsqueda parcial
-                }
+              
                 if (!string.IsNullOrEmpty(litros))
                 {
                     query += " AND Litros = @Litros";
@@ -312,10 +306,7 @@ namespace Proyecto_Banco_De_Sangre
                         {
                             cmd.Parameters.AddWithValue("@Sangre", "%" + sangre + "%"); // Usamos LIKE para búsqueda parcial
                         }
-                        if (!string.IsNullOrEmpty(cronica))
-                        {
-                            cmd.Parameters.AddWithValue("@Cronica", "%" + cronica + "%"); // Usamos LIKE para búsqueda parcial
-                        }
+                      
                         if (!string.IsNullOrEmpty(litros))
                         {
                             cmd.Parameters.AddWithValue("@Litros", litros);

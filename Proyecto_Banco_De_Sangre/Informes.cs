@@ -15,7 +15,9 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Informes : Form
     {
         DataTable dt = new DataTable();
+        //tring conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+
 
         public Informes()
         {
@@ -52,25 +54,7 @@ namespace Proyecto_Banco_De_Sangre
         }
 
         private void InitializeCustomComponents()
-        {/*
-            // Agregar DateTimePicker
-            DateTimePicker dateTimePicker = new DateTimePicker();
-            dateTimePicker.Location = new Point(10, 10); // Ajusta la ubicación según sea necesario
-            dateTimePicker.Format = DateTimePickerFormat.Short; // Formato de fecha corto
-            this.Controls.Add(dateTimePicker);
-
-            // Agregar ComboBox para seleccionar el rango de días
-            ComboBox comboBox = new ComboBox();
-            comboBox.Items.Add("Últimos 7 días");
-            comboBox.Items.Add("Últimos 15 días");
-            comboBox.Items.Add("Últimos 30 días");
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList; // Esto asegura que solo se pueda seleccionar una opción
-            comboBox.Location = new Point(10, 50); // Ajusta la ubicación según sea necesario
-            comboBox.SelectedIndexChanged += (sender, e) => GenerateReport(dateTimePicker.Value, comboBox.SelectedItem.ToString());
-            this.Controls.Add(comboBox);
-
-            label2.Text = DateTime.Today.ToString("dd/MM/yyyy");
-            */
+        {
 
         }
 
@@ -123,7 +107,8 @@ namespace Proyecto_Banco_De_Sangre
 
         private void Informes_Load_1(object sender, EventArgs e)
         {
-
+            CargarDatos();
+            label2.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -209,6 +194,13 @@ namespace Proyecto_Banco_De_Sangre
         private void dtw_Informes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Registroscs frm = new Registroscs(); 
+            frm.Show();
+            this.Hide();
         }
     }
 } 

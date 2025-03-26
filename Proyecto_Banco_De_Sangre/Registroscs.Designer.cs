@@ -49,9 +49,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.txtcronica = new System.Windows.Forms.ComboBox();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.txtlitros = new System.Windows.Forms.Label();
@@ -165,18 +163,18 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // txtnombre
             // 
-            this.txtnombre.Location = new System.Drawing.Point(12, 110);
+            this.txtnombre.Location = new System.Drawing.Point(15, 108);
             this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(121, 22);
+            this.txtnombre.Size = new System.Drawing.Size(197, 22);
             this.txtnombre.TabIndex = 2;
             // 
             // txtedad
             // 
-            this.txtedad.Location = new System.Drawing.Point(155, 110);
+            this.txtedad.Location = new System.Drawing.Point(241, 108);
             this.txtedad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtedad.Name = "txtedad";
-            this.txtedad.Size = new System.Drawing.Size(38, 22);
+            this.txtedad.Size = new System.Drawing.Size(39, 22);
             this.txtedad.TabIndex = 3;
             // 
             // txtsangre
@@ -191,7 +189,7 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.txtsangre.Location = new System.Drawing.Point(211, 110);
+            this.txtsangre.Location = new System.Drawing.Point(297, 108);
             this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsangre.Name = "txtsangre";
             this.txtsangre.Size = new System.Drawing.Size(103, 24);
@@ -200,7 +198,7 @@ namespace Proyecto_Banco_De_Sangre
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 60);
+            this.label1.Location = new System.Drawing.Point(15, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(121, 17);
             this.label1.TabIndex = 8;
@@ -209,7 +207,7 @@ namespace Proyecto_Banco_De_Sangre
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 60);
+            this.label2.Location = new System.Drawing.Point(239, 59);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 17);
             this.label2.TabIndex = 9;
@@ -218,24 +216,15 @@ namespace Proyecto_Banco_De_Sangre
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(208, 60);
+            this.label3.Location = new System.Drawing.Point(295, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(106, 17);
             this.label3.TabIndex = 10;
             this.label3.Text = "Tipo de Sangre";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(331, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(137, 17);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "Enfermedad Crónica";
-            // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(694, 49);
+            this.btnAgregar.Location = new System.Drawing.Point(693, 49);
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(77, 39);
@@ -244,21 +233,10 @@ namespace Proyecto_Banco_De_Sangre
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // txtcronica
-            // 
-            this.txtcronica.FormattingEnabled = true;
-            this.txtcronica.Items.AddRange(new object[] {
-            "Si",
-            "No"});
-            this.txtcronica.Location = new System.Drawing.Point(334, 110);
-            this.txtcronica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtcronica.Name = "txtcronica";
-            this.txtcronica.Size = new System.Drawing.Size(134, 24);
-            this.txtcronica.TabIndex = 13;
-            // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(694, 108);
+            this.btnEliminar.Location = new System.Drawing.Point(693, 108);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(77, 39);
             this.btnEliminar.TabIndex = 14;
@@ -268,7 +246,8 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(812, 451);
+            this.button2.Location = new System.Drawing.Point(812, 450);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 37);
             this.button2.TabIndex = 15;
@@ -279,7 +258,7 @@ namespace Proyecto_Banco_De_Sangre
             // txtlitros
             // 
             this.txtlitros.AutoSize = true;
-            this.txtlitros.Location = new System.Drawing.Point(500, 60);
+            this.txtlitros.Location = new System.Drawing.Point(465, 59);
             this.txtlitros.Name = "txtlitros";
             this.txtlitros.Size = new System.Drawing.Size(43, 17);
             this.txtlitros.TabIndex = 16;
@@ -288,6 +267,7 @@ namespace Proyecto_Banco_De_Sangre
             // btnConsultar
             // 
             this.btnConsultar.Location = new System.Drawing.Point(847, 110);
+            this.btnConsultar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(77, 39);
             this.btnConsultar.TabIndex = 18;
@@ -298,6 +278,7 @@ namespace Proyecto_Banco_De_Sangre
             // btnModificar
             // 
             this.btnModificar.Location = new System.Drawing.Point(847, 49);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(77, 39);
             this.btnModificar.TabIndex = 19;
@@ -307,10 +288,10 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // txtlitros2
             // 
-            this.txtlitros2.Location = new System.Drawing.Point(497, 110);
+            this.txtlitros2.Location = new System.Drawing.Point(462, 108);
             this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtlitros2.Name = "txtlitros2";
-            this.txtlitros2.Size = new System.Drawing.Size(46, 22);
+            this.txtlitros2.Size = new System.Drawing.Size(47, 22);
             this.txtlitros2.TabIndex = 20;
             // 
             // Registroscs
@@ -324,9 +305,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Controls.Add(this.txtlitros);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnEliminar);
-            this.Controls.Add(this.txtcronica);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -362,9 +341,7 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.ComboBox txtcronica;
         private System.Windows.Forms.Button btnEliminar;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label txtlitros;

@@ -35,6 +35,10 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fRHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.litrosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
             this.bancosangreDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -44,10 +48,7 @@ namespace Proyecto_Banco_De_Sangre
             this.registrosBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.sangreTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1TableAdapters.SangreTableAdapter();
             this.Litrostotales = new System.Windows.Forms.Label();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fRHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.litrosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
@@ -60,7 +61,7 @@ namespace Proyecto_Banco_De_Sangre
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 107);
+            this.label1.Location = new System.Drawing.Point(12, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 17);
             this.label1.TabIndex = 0;
@@ -78,7 +79,8 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 139);
+            this.comboBox1.Location = new System.Drawing.Point(-3, 130);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 1;
@@ -88,7 +90,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cambria", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1090, 9);
+            this.label2.Location = new System.Drawing.Point(1091, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 33);
             this.label2.TabIndex = 2;
@@ -106,12 +108,46 @@ namespace Proyecto_Banco_De_Sangre
             this.litrosDataGridViewTextBoxColumn});
             this.dtw_Informes.DataSource = this.sangreBindingSource;
             this.dtw_Informes.Location = new System.Drawing.Point(152, 325);
+            this.dtw_Informes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtw_Informes.Name = "dtw_Informes";
             this.dtw_Informes.RowHeadersWidth = 51;
             this.dtw_Informes.RowTemplate.Height = 24;
             this.dtw_Informes.Size = new System.Drawing.Size(933, 319);
             this.dtw_Informes.TabIndex = 3;
             this.dtw_Informes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtw_Informes_CellContentClick);
+            // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fRHDataGridViewTextBoxColumn
+            // 
+            this.fRHDataGridViewTextBoxColumn.DataPropertyName = "F_RH";
+            this.fRHDataGridViewTextBoxColumn.HeaderText = "F_RH";
+            this.fRHDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fRHDataGridViewTextBoxColumn.Name = "fRHDataGridViewTextBoxColumn";
+            this.fRHDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fechaCDataGridViewTextBoxColumn
+            // 
+            this.fechaCDataGridViewTextBoxColumn.DataPropertyName = "Fecha_C";
+            this.fechaCDataGridViewTextBoxColumn.HeaderText = "Fecha_C";
+            this.fechaCDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fechaCDataGridViewTextBoxColumn.Name = "fechaCDataGridViewTextBoxColumn";
+            this.fechaCDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fechaCDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // litrosDataGridViewTextBoxColumn
+            // 
+            this.litrosDataGridViewTextBoxColumn.DataPropertyName = "Litros";
+            this.litrosDataGridViewTextBoxColumn.HeaderText = "Litros";
+            this.litrosDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.litrosDataGridViewTextBoxColumn.Name = "litrosDataGridViewTextBoxColumn";
+            this.litrosDataGridViewTextBoxColumn.Width = 125;
             // 
             // sangreBindingSource
             // 
@@ -160,38 +196,17 @@ namespace Proyecto_Banco_De_Sangre
             this.Litrostotales.TabIndex = 4;
             this.Litrostotales.Text = "     ";
             // 
-            // tSangreDataGridViewTextBoxColumn
+            // button1
             // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // fRHDataGridViewTextBoxColumn
-            // 
-            this.fRHDataGridViewTextBoxColumn.DataPropertyName = "F_RH";
-            this.fRHDataGridViewTextBoxColumn.HeaderText = "F_RH";
-            this.fRHDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fRHDataGridViewTextBoxColumn.Name = "fRHDataGridViewTextBoxColumn";
-            this.fRHDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // fechaCDataGridViewTextBoxColumn
-            // 
-            this.fechaCDataGridViewTextBoxColumn.DataPropertyName = "Fecha_C";
-            this.fechaCDataGridViewTextBoxColumn.HeaderText = "Fecha_C";
-            this.fechaCDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fechaCDataGridViewTextBoxColumn.Name = "fechaCDataGridViewTextBoxColumn";
-            this.fechaCDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fechaCDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // litrosDataGridViewTextBoxColumn
-            // 
-            this.litrosDataGridViewTextBoxColumn.DataPropertyName = "Litros";
-            this.litrosDataGridViewTextBoxColumn.HeaderText = "Litros";
-            this.litrosDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.litrosDataGridViewTextBoxColumn.Name = "litrosDataGridViewTextBoxColumn";
-            this.litrosDataGridViewTextBoxColumn.Width = 125;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(1135, 668);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(128, 55);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Regresar";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Informes
             // 
@@ -199,11 +214,13 @@ namespace Proyecto_Banco_De_Sangre
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1279, 724);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.Litrostotales);
             this.Controls.Add(this.dtw_Informes);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Informes";
             this.Text = "Informes";
             this.Load += new System.EventHandler(this.Informes_Load_1);
@@ -238,5 +255,6 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.DataGridViewTextBoxColumn fRHDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn litrosDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
     }
 }
