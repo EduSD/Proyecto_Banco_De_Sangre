@@ -119,6 +119,9 @@ namespace Proyecto_Banco_De_Sangre
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+            
+           
+
             if (!string.IsNullOrEmpty(comboBox1.Text))
             {
                 using (SqlConnection conexion = new SqlConnection(conexionString))
@@ -135,13 +138,25 @@ namespace Proyecto_Banco_De_Sangre
                         {
                             int totalMililitros = Convert.ToInt32(resultado);
                             label3.Text = "La cantidad de Mililitros total es de: " + totalMililitros.ToString();
+                            grafic.Text = " ";
+
+                           
+                            for (int i = 1; i <= totalMililitros/100; i++)
+                            {
+                                grafic.Text += "█    ";
+
+                            }
+
                         }
                         else
                         {
                             label3.Text = "No se tiene Sangre de este tipo de sangre";
+                            grafic.Text=" ";
                         }
                     }
                 }
+
+               
 
                 // Actualizar el DataGridView con los datos filtrados
                 CargarDatosFiltrados(comboBox1.Text);
@@ -208,6 +223,11 @@ namespace Proyecto_Banco_De_Sangre
             Registroscs frm = new Registroscs(); 
             frm.Show();
             this.Hide();
+        }
+
+        private void grafic_Click(object sender, EventArgs e)
+        {
+
         }
     }
 } 
