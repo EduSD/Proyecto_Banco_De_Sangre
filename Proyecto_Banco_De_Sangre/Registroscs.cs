@@ -25,7 +25,6 @@ namespace Proyecto_Banco_De_Sangre
             try
             {
                 // Limpiar el DataTable antes de volver a llenarlo
-                dt.Clear();
 
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
@@ -49,17 +48,7 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void Registroscs_Load(object sender, EventArgs e)
         {
-            label5.Text = DateTime.Now.ToString("dd/mm/yyyy");
-
-
-            dt.Columns.Add("ID");
-            dt.Columns.Add("NOMBRE_D");
-            dt.Columns.Add("EDAD");
-            dt.Columns.Add("T_SANGRE");
-            dt.Columns.Add("MILILITROS_D");
-            dt.Columns.Add("FECHA_D");
-            dtw_Registro.DataSource = dt;
-            CargarDatos();
+         
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
@@ -254,7 +243,28 @@ namespace Proyecto_Banco_De_Sangre
         // Nos daban algunos errores en el codigo por eso el catch para excepciones
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            txtID.Enabled=true;
+           
+
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
+
+
+
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Informes frm = new Informes(); // Cambiar a formulario de Informes
+            frm.Show();
+            this.Hide();
+        }
+
+        private void btnModificar_Click_1(object sender, EventArgs e)
+        {
+            txtID.Enabled = true;
             btnConsultar.Enabled = true;
             btnEliminar.Enabled = true;
 
@@ -267,10 +277,23 @@ namespace Proyecto_Banco_De_Sangre
 
         }
 
-        private void btnConsultar_Click(object sender, EventArgs e)
+        private void Registroscs_Load_1(object sender, EventArgs e)
         {
+            label5.Text = DateTime.Now.ToString("dd/mm/yyyy");
 
 
+            dt.Columns.Add("ID");
+            dt.Columns.Add("NOMBRE_D");
+            dt.Columns.Add("EDAD");
+            dt.Columns.Add("T_SANGRE");
+            dt.Columns.Add("MILILITROS_D");
+            dt.Columns.Add("FECHA_D");
+            dtw_Registro.DataSource = dt;
+            CargarDatos();
+        }
+
+        private void btnConsultar_Click_1(object sender, EventArgs e)
+        {
 
             try
             {
@@ -357,11 +380,74 @@ namespace Proyecto_Banco_De_Sangre
             txtlitros2.Enabled = true;
             txtID.Text = " ";
 
-
         }
 
+        private void btnEliminar_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                // Obtener el ID del TextBox
+                if (int.TryParse(txtID.Text, out int idRegistro))
+                {
+                    // Confirmación antes de eliminar
+                    DialogResult resultado = MessageBox.Show(
+                        "¿Estás seguro de que deseas eliminar el registro con ID " + idRegistro + "? Esta acción no se puede deshacer.",
+                        "Confirmar eliminación",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (resultado == DialogResult.Yes)
+                    {
+                        using (SqlConnection conexion = new SqlConnection(conexionString))
+                        {
+                            conexion.Open();
+                            string query = "DELETE FROM Registros WHERE ID = @ID";
+
+                            using (SqlCommand cmd = new SqlCommand(query, conexion))
+                            {
+                                cmd.Parameters.AddWithValue("@ID", idRegistro);
+                                int filasAfectadas = cmd.ExecuteNonQuery();
+
+                                if (filasAfectadas > 0)
+                                {
+                                    CargarDatos(); // Recargar los datos para actualizar la tabla
+                                    MessageBox.Show("Registro eliminado correctamente.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se encontró ningún registro con el ID especificado.");
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Por favor, ingresa un ID válido.");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error al eliminar el registro: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}");
+            }
+            CargarDatos();
 
 
+            txtID.Enabled = false;
+            btnConsultar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            txtnombre.Enabled = true;
+            txtedad.Enabled = true;
+            txtsangre.Enabled = true;
+            txtlitros2.Enabled = true;
+
+        }
     }
            
 }

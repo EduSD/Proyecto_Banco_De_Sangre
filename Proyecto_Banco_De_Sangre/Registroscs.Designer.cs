@@ -258,6 +258,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnEliminar.TabIndex = 14;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click_1);
             // 
             // button2
             // 
@@ -269,6 +270,7 @@ namespace Proyecto_Banco_De_Sangre
             this.button2.TabIndex = 15;
             this.button2.Text = "Reportes";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // txtlitros
             // 
@@ -292,6 +294,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnConsultar.TabIndex = 18;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click_1);
             // 
             // btnModificar
             // 
@@ -303,6 +306,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnModificar.TabIndex = 19;
             this.btnModificar.Text = "Habilitar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
             // 
             // txtlitros2
             // 
@@ -370,6 +374,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Registroscs";
             this.Text = "Registroscs";
+            this.Load += new System.EventHandler(this.Registroscs_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).EndInit();
