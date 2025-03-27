@@ -8,101 +8,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.Windows.Forms.DataVisualization.Charting; // Agregar esta línea
 
 namespace Proyecto_Banco_De_Sangre
 {
     public partial class Informes : Form
     {
         DataTable dt = new DataTable();
-        //tring conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-
+        string conexionString = "Server=DESKTOP-NC4SAIF\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        private Chart chartSangre; // Declarar el objeto Chart
 
         public Informes()
         {
             InitializeComponent();
             InitializeCustomComponents();
-
         }
 
+        private void InitializeCustomComponents()
+        {
+            // Crear el Chart dinámicamente
+            chartSangre = new Chart();
+            chartSangre.Location = new Point(300, 50); // Posición del gráfico
+            chartSangre.Size = new Size(600, 300); // Tamaño del gráfico
+            Controls.Add(chartSangre);
 
-
-        //carag en la base de datos
-
+            // Configurar el Chart
+            chartSangre.ChartAreas.Add(new ChartArea("SangreArea"));
+            chartSangre.Series.Add(new Series("Mililitros"));
+            chartSangre.Series["Mililitros"].ChartType = SeriesChartType.Column;
+            chartSangre.Series["Mililitros"].XValueMember = "T_Sangre";
+            chartSangre.Series["Mililitros"].YValueMembers = "MILILITROS_D";
+            chartSangre.Series["Mililitros"].IsValueShownAsLabel = true;
+        }
 
         private void CargarDatos()
         {
-            
             DataTable dt = new DataTable();
             using (SqlConnection conexion = new SqlConnection(conexionString))
             {
                 conexion.Open();
-
                 string query = "Select * from Sangre";
-
-
                 using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
                 {
                     da.Fill(dt);
                 }
             }
-
-
-
             dtw_Informes.DataSource = dt;
-        }
-
-        private void InitializeCustomComponents()
-        {
-
-        }
-
-        private void GenerateReport(DateTime selectedDate, string range)
-        {
-            DateTime startDate = selectedDate;
-            DateTime endDate = DateTime.Now;
-
-            switch (range)
-            {
-                case "Últimos 7 días":
-                    startDate = selectedDate.AddDays(-7);
-                    break;
-                case "Últimos 15 días":
-                    startDate = selectedDate.AddDays(-15);
-                    break;
-                case "Últimos 30 días":
-                    startDate = selectedDate.AddDays(-30);
-                    break;
-            }
-
-            // Obtener registros y mostrar en el informe
-            InformeManager informeManager = new InformeManager();
-            List<Registro> registros = informeManager.ObtenerRegistros(startDate, endDate);
-            MostrarRegistrosEnInforme(registros);
-        }
-
-        private void MostrarRegistrosEnInforme(List<Registro> registros)
-        {
-            StringBuilder informe = new StringBuilder();
-            foreach (var registro in registros)
-            {
-                informe.AppendLine($"{registro.Fecha.ToShortDateString()}: {registro.Detalle}");
-            }
-            MessageBox.Show(informe.ToString(), "Informe", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-        //declaracion delas columnas de la tabla
-        private void Informes_Load(object sender, EventArgs e)
-        {
-            dt.Columns.Add("T_Sangre");
-            dt.Columns.Add("F_RH");
-            dt.Columns.Add("Fecha_C");
-            dt.Columns.Add("Litros");
-
-            dtw_Informes.DataSource = dt;
-
-            CargarDatos();
-
         }
 
         private void Informes_Load_1(object sender, EventArgs e)
@@ -111,194 +62,8 @@ namespace Proyecto_Banco_De_Sangre
             label2.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {/*
-            //salto
-            if (comboBox1.Text.Equals("A+"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                      
-
-                    }
-
-                }
-
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-            }
-
-            //salto
-            else if (comboBox1.Text.Equals("A-"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            else if (comboBox1.Text.Equals("B+"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            //salto
-            else if (comboBox1.Text.Equals("B-"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            //salto
-            else if (comboBox1.Text.Equals("AB+"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            //salto
-            else if (comboBox1.Text.Equals("AB-"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            //salto
-            else if (comboBox1.Text.Equals("O+"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-            //salto
-            else if (comboBox1.Text.Equals("O-"))
-            {
-                DataTable dt = new DataTable();
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
-
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dt);
-                        }
-                    }
-                }
-
-                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
-
-            }
-*/
-
+        {
             if (!string.IsNullOrEmpty(comboBox1.Text))
             {
                 using (SqlConnection conexion = new SqlConnection(conexionString))
@@ -308,9 +73,7 @@ namespace Proyecto_Banco_De_Sangre
                     using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@TipoSangre", comboBox1.Text);
-
                         object resultado = cmd.ExecuteScalar();
-
                         if (resultado != DBNull.Value && resultado != null)
                         {
                             int totalMililitros = Convert.ToInt32(resultado);
@@ -322,14 +85,14 @@ namespace Proyecto_Banco_De_Sangre
                         }
                     }
                 }
-
-                // Actualizar el DataGridView con los datos filtrados
                 CargarDatosFiltrados(comboBox1.Text);
+                ActualizarGrafico(comboBox1.Text);
             }
             else
             {
-                label3.Text = ""; // Limpiar el Label si no se selecciona un tipo de sangre
-                CargarDatos(); // Mostrar todos los datos en el DataGridView
+                label3.Text = "";
+                CargarDatos();
+                ActualizarGrafico("");
             }
         }
 
@@ -343,7 +106,6 @@ namespace Proyecto_Banco_De_Sangre
                 using (SqlCommand cmd = new SqlCommand(query, conexion))
                 {
                     cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
-
                     using (SqlDataAdapter da = new SqlDataAdapter(cmd))
                     {
                         da.Fill(dt);
@@ -353,41 +115,42 @@ namespace Proyecto_Banco_De_Sangre
             dtw_Informes.DataSource = dt;
         }
 
-        // Aqui no se como quieres mostrar el informe con sangre de grupos compartidos o 1x1
-        public class Registro
+        private void ActualizarGrafico(string tipoSangre)
         {
-            public DateTime Fecha { get; set; }
-            public string Detalle { get; set; }
-        }
-
-        public class InformeManager
-        {
-            public List<Registro> ObtenerRegistros(DateTime startDate, DateTime endDate)
+            DataTable dtGrafico = new DataTable();
+            using (SqlConnection conexion = new SqlConnection(conexionString))
             {
-                // Datos falsos xd
-                List<Registro> registros = new List<Registro>
-            {
-                new Registro { Fecha = DateTime.Now.AddDays(-1), Detalle = "Donación de sangre A+" },
-                new Registro { Fecha = DateTime.Now.AddDays(-5), Detalle = "Donación de sangre O-" },
-                new Registro { Fecha = DateTime.Now.AddDays(-10), Detalle = "Donación de sangre B+" },
-                new Registro { Fecha = DateTime.Now.AddDays(-20), Detalle = "Donación de sangre AB-" }
-            };
-
-                // Filtrar registros por rango de fechas pero se platica después serian 7 dias, 15 dias o 30 dias por ejemplo
-                return registros.Where(r => r.Fecha >= startDate && r.Fecha <= endDate).ToList();
+                conexion.Open();
+                string query;
+                if (string.IsNullOrEmpty(tipoSangre))
+                {
+                    query = "SELECT T_Sangre, SUM(MILILITROS_D) AS MILILITROS_D FROM Sangre GROUP BY T_Sangre";
+                }
+                else
+                {
+                    query = "SELECT T_Sangre, SUM(MILILITROS_D) AS MILILITROS_D FROM Sangre WHERE T_Sangre = @TipoSangre GROUP BY T_Sangre";
+                }
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                {
+                    if (!string.IsNullOrEmpty(tipoSangre))
+                    {
+                        cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
+                    }
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dtGrafico);
+                    }
+                }
             }
-        }
-
-        private void dtw_Informes_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            chartSangre.DataSource = dtGrafico;
+            chartSangre.DataBind();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Registroscs frm = new Registroscs(); 
+            Registroscs frm = new Registroscs();
             frm.Show();
             this.Hide();
         }
     }
-} 
+}

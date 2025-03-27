@@ -98,7 +98,6 @@ namespace Proyecto_Banco_De_Sangre
             this.label2.Size = new System.Drawing.Size(141, 33);
             this.label2.TabIndex = 2;
             this.label2.Text = "                     ";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // dtw_Informes
             // 
@@ -118,7 +117,6 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Informes.RowTemplate.Height = 24;
             this.dtw_Informes.Size = new System.Drawing.Size(1289, 319);
             this.dtw_Informes.TabIndex = 3;
-            this.dtw_Informes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtw_Informes_CellContentClick);
             // 
             // sangreBindingSource
             // 

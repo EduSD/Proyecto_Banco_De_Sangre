@@ -35,6 +35,12 @@ namespace Proyecto_Banco_De_Sangre
             this.aLUMNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.aLUMNOSTableAdapter = new Proyecto_Banco_De_Sangre.DATOSDataSetTableAdapters.ALUMNOSTableAdapter();
             this.dtw_Registro = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NOMBRE_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MILILITROS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FECHA_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.registrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet = new Proyecto_Banco_De_Sangre.banco_sangreDataSet();
             this.registrosTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSetTableAdapters.RegistrosTableAdapter();
@@ -54,12 +60,6 @@ namespace Proyecto_Banco_De_Sangre
             this.txtID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NOMBRE_C = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MILILITROS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FECHA_D = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -101,6 +101,55 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Registro.RowTemplate.Height = 24;
             this.dtw_Registro.Size = new System.Drawing.Size(1324, 260);
             this.dtw_Registro.TabIndex = 0;
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // NOMBRE_C
+            // 
+            this.NOMBRE_C.DataPropertyName = "NOMBRE_C";
+            this.NOMBRE_C.HeaderText = "Nombre";
+            this.NOMBRE_C.MinimumWidth = 6;
+            this.NOMBRE_C.Name = "NOMBRE_C";
+            this.NOMBRE_C.Width = 125;
+            // 
+            // edadDataGridViewTextBoxColumn
+            // 
+            this.edadDataGridViewTextBoxColumn.DataPropertyName = "Edad";
+            this.edadDataGridViewTextBoxColumn.HeaderText = "Año Nacimiento";
+            this.edadDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.edadDataGridViewTextBoxColumn.Name = "edadDataGridViewTextBoxColumn";
+            this.edadDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // MILILITROS
+            // 
+            this.MILILITROS.DataPropertyName = "MILILITROS_D";
+            this.MILILITROS.HeaderText = "Mililitros";
+            this.MILILITROS.MinimumWidth = 6;
+            this.MILILITROS.Name = "MILILITROS";
+            this.MILILITROS.Width = 125;
+            // 
+            // FECHA_D
+            // 
+            this.FECHA_D.DataPropertyName = "FECHA_D";
+            this.FECHA_D.HeaderText = "Fecha_D";
+            this.FECHA_D.MinimumWidth = 6;
+            this.FECHA_D.Name = "FECHA_D";
+            this.FECHA_D.Width = 125;
             // 
             // registrosBindingSource
             // 
@@ -209,7 +258,6 @@ namespace Proyecto_Banco_De_Sangre
             this.btnEliminar.TabIndex = 14;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // button2
             // 
@@ -221,7 +269,6 @@ namespace Proyecto_Banco_De_Sangre
             this.button2.TabIndex = 15;
             this.button2.Text = "Reportes";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnReportes_Click);
             // 
             // txtlitros
             // 
@@ -245,7 +292,6 @@ namespace Proyecto_Banco_De_Sangre
             this.btnConsultar.TabIndex = 18;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // btnModificar
             // 
@@ -257,7 +303,6 @@ namespace Proyecto_Banco_De_Sangre
             this.btnModificar.TabIndex = 19;
             this.btnModificar.Text = "Habilitar";
             this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // txtlitros2
             // 
@@ -298,55 +343,6 @@ namespace Proyecto_Banco_De_Sangre
             this.label5.TabIndex = 23;
             this.label5.Text = ".";
             // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
-            this.iDDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // NOMBRE_C
-            // 
-            this.NOMBRE_C.DataPropertyName = "NOMBRE_C";
-            this.NOMBRE_C.HeaderText = "Nombre";
-            this.NOMBRE_C.MinimumWidth = 6;
-            this.NOMBRE_C.Name = "NOMBRE_C";
-            this.NOMBRE_C.Width = 125;
-            // 
-            // edadDataGridViewTextBoxColumn
-            // 
-            this.edadDataGridViewTextBoxColumn.DataPropertyName = "Edad";
-            this.edadDataGridViewTextBoxColumn.HeaderText = "Año Nacimiento";
-            this.edadDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.edadDataGridViewTextBoxColumn.Name = "edadDataGridViewTextBoxColumn";
-            this.edadDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // tSangreDataGridViewTextBoxColumn
-            // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // MILILITROS
-            // 
-            this.MILILITROS.DataPropertyName = "MILILITROS_D";
-            this.MILILITROS.HeaderText = "Mililitros";
-            this.MILILITROS.MinimumWidth = 6;
-            this.MILILITROS.Name = "MILILITROS";
-            this.MILILITROS.Width = 125;
-            // 
-            // FECHA_D
-            // 
-            this.FECHA_D.DataPropertyName = "FECHA_D";
-            this.FECHA_D.HeaderText = "Fecha_D";
-            this.FECHA_D.MinimumWidth = 6;
-            this.FECHA_D.Name = "FECHA_D";
-            this.FECHA_D.Width = 125;
-            // 
             // Registroscs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -374,7 +370,6 @@ namespace Proyecto_Banco_De_Sangre
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Registroscs";
             this.Text = "Registroscs";
-            this.Load += new System.EventHandler(this.Registroscs_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).EndInit();
