@@ -82,7 +82,7 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(49, 128);
+            this.comboBox1.Location = new System.Drawing.Point(49, 148);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(154, 28);
@@ -208,9 +208,8 @@ namespace Proyecto_Banco_De_Sangre
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(93, 275);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 24);
+            this.label3.Size = new System.Drawing.Size(0, 24);
             this.label3.TabIndex = 6;
-            this.label3.Text = "label3";
             // 
             // Informes
             // 

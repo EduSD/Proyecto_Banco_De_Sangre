@@ -71,6 +71,18 @@ namespace Proyecto_Banco_De_Sangre
                 int edad = int.Parse(txtedad.Text);
                 string sangre = txtsangre.Text;
 
+                int fn = int.Parse(txtedad.Text);
+                int fa = Convert.ToInt32( DateTime.Now.ToString("yyyy"));
+                int d = fa - fn;
+
+
+                if (d < 17)
+                {
+                    MessageBox.Show("No puedes donar sangre si eres menor de 17 años.");
+                    return; // Detener la ejecución del método
+                }
+
+
                 // Validación de cantidad de litros donados
                 if (litrosDonados > 450)
                 {
