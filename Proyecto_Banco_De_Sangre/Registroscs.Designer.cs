@@ -30,10 +30,15 @@ namespace Proyecto_Banco_De_Sangre
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Registroscs));
             this.dATOSDataSet = new Proyecto_Banco_De_Sangre.DATOSDataSet();
             this.aLUMNOSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.aLUMNOSTableAdapter = new Proyecto_Banco_De_Sangre.DATOSDataSetTableAdapters.ALUMNOSTableAdapter();
             this.dtw_Registro = new System.Windows.Forms.DataGridView();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MILILITROS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.registrosBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet = new Proyecto_Banco_De_Sangre.banco_sangreDataSet();
             this.registrosTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSetTableAdapters.RegistrosTableAdapter();
@@ -50,12 +55,6 @@ namespace Proyecto_Banco_De_Sangre
             this.btnConsultar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.txtlitros2 = new System.Windows.Forms.TextBox();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edadDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MILILITROS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
@@ -86,168 +85,17 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Registro.ColumnHeadersHeight = 29;
             this.dtw_Registro.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.iDDataGridViewTextBoxColumn,
-            this.nombreDataGridViewTextBoxColumn,
             this.edadDataGridViewTextBoxColumn,
             this.tSangreDataGridViewTextBoxColumn,
-            this.MILILITROS,
-            this.fechaDataGridViewTextBoxColumn});
+            this.MILILITROS});
             this.dtw_Registro.DataSource = this.registrosBindingSource;
             this.dtw_Registro.Location = new System.Drawing.Point(12, 223);
             this.dtw_Registro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtw_Registro.Name = "dtw_Registro";
             this.dtw_Registro.RowHeadersWidth = 51;
             this.dtw_Registro.RowTemplate.Height = 24;
-            this.dtw_Registro.Size = new System.Drawing.Size(1142, 260);
+            this.dtw_Registro.Size = new System.Drawing.Size(1324, 260);
             this.dtw_Registro.TabIndex = 0;
-            // 
-            // registrosBindingSource
-            // 
-            this.registrosBindingSource.DataMember = "Registros";
-            this.registrosBindingSource.DataSource = this.banco_sangreDataSet;
-            // 
-            // banco_sangreDataSet
-            // 
-            this.banco_sangreDataSet.DataSetName = "banco_sangreDataSet";
-            this.banco_sangreDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // registrosTableAdapter
-            // 
-            this.registrosTableAdapter.ClearBeforeFill = true;
-            // 
-            // txtnombre
-            // 
-            this.txtnombre.Location = new System.Drawing.Point(26, 157);
-            this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtnombre.Name = "txtnombre";
-            this.txtnombre.Size = new System.Drawing.Size(197, 22);
-            this.txtnombre.TabIndex = 2;
-            // 
-            // txtedad
-            // 
-            this.txtedad.Location = new System.Drawing.Point(252, 157);
-            this.txtedad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtedad.Name = "txtedad";
-            this.txtedad.Size = new System.Drawing.Size(39, 22);
-            this.txtedad.TabIndex = 3;
-            // 
-            // txtsangre
-            // 
-            this.txtsangre.FormattingEnabled = true;
-            this.txtsangre.Items.AddRange(new object[] {
-            "A+",
-            "A-",
-            "B+",
-            "B-",
-            "AB+",
-            "AB-",
-            "O+",
-            "O-"});
-            this.txtsangre.Location = new System.Drawing.Point(308, 157);
-            this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtsangre.Name = "txtsangre";
-            this.txtsangre.Size = new System.Drawing.Size(103, 24);
-            this.txtsangre.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Nombre Completo";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(250, 108);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 17);
-            this.label2.TabIndex = 9;
-            this.label2.Text = "Edad";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(306, 108);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(106, 17);
-            this.label3.TabIndex = 10;
-            this.label3.Text = "Tipo de Sangre";
-            // 
-            // btnAgregar
-            // 
-            this.btnAgregar.Location = new System.Drawing.Point(580, 149);
-            this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(77, 39);
-            this.btnAgregar.TabIndex = 12;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
-            // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(993, 149);
-            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(77, 39);
-            this.btnEliminar.TabIndex = 14;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1051, 505);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(103, 52);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "Reportes";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btnReportes_Click);
-            // 
-            // txtlitros
-            // 
-            this.txtlitros.AutoSize = true;
-            this.txtlitros.Location = new System.Drawing.Point(476, 108);
-            this.txtlitros.Name = "txtlitros";
-            this.txtlitros.Size = new System.Drawing.Size(58, 17);
-            this.txtlitros.TabIndex = 16;
-            this.txtlitros.Text = "Mililitros";
-            // 
-            // btnConsultar
-            // 
-            this.btnConsultar.Enabled = false;
-            this.btnConsultar.Location = new System.Drawing.Point(867, 149);
-            this.btnConsultar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(77, 39);
-            this.btnConsultar.TabIndex = 18;
-            this.btnConsultar.Text = "Consultar";
-            this.btnConsultar.UseVisualStyleBackColor = true;
-            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
-            // 
-            // btnModificar
-            // 
-            this.btnModificar.Location = new System.Drawing.Point(724, 65);
-            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(77, 39);
-            this.btnModificar.TabIndex = 19;
-            this.btnModificar.Text = "Habilitar";
-            this.btnModificar.UseVisualStyleBackColor = true;
-            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
-            // 
-            // txtlitros2
-            // 
-            this.txtlitros2.Location = new System.Drawing.Point(473, 157);
-            this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtlitros2.Name = "txtlitros2";
-            this.txtlitros2.Size = new System.Drawing.Size(47, 22);
-            this.txtlitros2.TabIndex = 20;
             // 
             // iDDataGridViewTextBoxColumn
             // 
@@ -257,14 +105,6 @@ namespace Proyecto_Banco_De_Sangre
             this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
             this.iDDataGridViewTextBoxColumn.ReadOnly = true;
             this.iDDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // nombreDataGridViewTextBoxColumn
-            // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "Nombre_C";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "Nombre_C";
-            this.nombreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            this.nombreDataGridViewTextBoxColumn.Width = 125;
             // 
             // edadDataGridViewTextBoxColumn
             // 
@@ -290,36 +130,199 @@ namespace Proyecto_Banco_De_Sangre
             this.MILILITROS.Name = "MILILITROS";
             this.MILILITROS.Width = 125;
             // 
-            // fechaDataGridViewTextBoxColumn
+            // registrosBindingSource
             // 
-            this.fechaDataGridViewTextBoxColumn.DataPropertyName = "Fecha_D";
-            this.fechaDataGridViewTextBoxColumn.HeaderText = "Fecha_D";
-            this.fechaDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fechaDataGridViewTextBoxColumn.Name = "fechaDataGridViewTextBoxColumn";
-            this.fechaDataGridViewTextBoxColumn.Width = 125;
+            this.registrosBindingSource.DataMember = "Registros";
+            this.registrosBindingSource.DataSource = this.banco_sangreDataSet;
+            // 
+            // banco_sangreDataSet
+            // 
+            this.banco_sangreDataSet.DataSetName = "banco_sangreDataSet";
+            this.banco_sangreDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // registrosTableAdapter
+            // 
+            this.registrosTableAdapter.ClearBeforeFill = true;
+            // 
+            // txtnombre
+            // 
+            this.txtnombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtnombre.Location = new System.Drawing.Point(12, 108);
+            this.txtnombre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtnombre.Name = "txtnombre";
+            this.txtnombre.Size = new System.Drawing.Size(185, 27);
+            this.txtnombre.TabIndex = 2;
+            // 
+            // txtedad
+            // 
+            this.txtedad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtedad.Location = new System.Drawing.Point(221, 108);
+            this.txtedad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtedad.Name = "txtedad";
+            this.txtedad.Size = new System.Drawing.Size(45, 27);
+            this.txtedad.TabIndex = 3;
+            // 
+            // txtsangre
+            // 
+            this.txtsangre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtsangre.FormattingEnabled = true;
+            this.txtsangre.Items.AddRange(new object[] {
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "AB+",
+            "AB-",
+            "O+",
+            "O-"});
+            this.txtsangre.Location = new System.Drawing.Point(288, 108);
+            this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtsangre.Name = "txtsangre";
+            this.txtsangre.Size = new System.Drawing.Size(114, 28);
+            this.txtsangre.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(37, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 20);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Nombre Completo";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(217, 76);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 20);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Edad";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(284, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(122, 20);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Tipo de Sangre";
+            // 
+            // btnAgregar
+            // 
+            this.btnAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregar.Location = new System.Drawing.Point(780, 103);
+            this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(79, 39);
+            this.btnAgregar.TabIndex = 12;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Enabled = false;
+            this.btnEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.Location = new System.Drawing.Point(1053, 103);
+            this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(86, 39);
+            this.btnEliminar.TabIndex = 14;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(1233, 658);
+            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(103, 52);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Reportes";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btnReportes_Click);
+            // 
+            // txtlitros
+            // 
+            this.txtlitros.AutoSize = true;
+            this.txtlitros.BackColor = System.Drawing.Color.Transparent;
+            this.txtlitros.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtlitros.Location = new System.Drawing.Point(441, 76);
+            this.txtlitros.Name = "txtlitros";
+            this.txtlitros.Size = new System.Drawing.Size(72, 20);
+            this.txtlitros.TabIndex = 16;
+            this.txtlitros.Text = "Mililitros";
+            // 
+            // btnConsultar
+            // 
+            this.btnConsultar.Enabled = false;
+            this.btnConsultar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConsultar.Location = new System.Drawing.Point(901, 103);
+            this.btnConsultar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConsultar.Name = "btnConsultar";
+            this.btnConsultar.Size = new System.Drawing.Size(90, 39);
+            this.btnConsultar.TabIndex = 18;
+            this.btnConsultar.Text = "Consultar";
+            this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
+            // 
+            // btnModificar
+            // 
+            this.btnModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnModificar.Location = new System.Drawing.Point(1197, 103);
+            this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(81, 39);
+            this.btnModificar.TabIndex = 19;
+            this.btnModificar.Text = "Habilitar";
+            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
+            // 
+            // txtlitros2
+            // 
+            this.txtlitros2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtlitros2.Location = new System.Drawing.Point(437, 108);
+            this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtlitros2.Name = "txtlitros2";
+            this.txtlitros2.Size = new System.Drawing.Size(76, 27);
+            this.txtlitros2.TabIndex = 20;
             // 
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(908, 82);
+            this.txtID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtID.Location = new System.Drawing.Point(540, 108);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(100, 22);
+            this.txtID.Size = new System.Drawing.Size(148, 27);
             this.txtID.TabIndex = 21;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(905, 28);
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(556, 76);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 17);
+            this.label4.Size = new System.Drawing.Size(111, 20);
             this.label4.TabIndex = 22;
-            this.label4.Text = "Agrege el ID";
+            this.label4.Text = "Agregue el ID";
             // 
             // Registroscs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1181, 568);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.ClientSize = new System.Drawing.Size(1348, 721);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.txtlitros2);

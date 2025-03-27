@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace Proyecto_Banco_De_Sangre
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
         private int intentos = 0;
         private const int maxIntentos = 4;
 
-        public Form1()
+        public Login()
         {
             InitializeComponent();
             btnentrar.Enabled = false;

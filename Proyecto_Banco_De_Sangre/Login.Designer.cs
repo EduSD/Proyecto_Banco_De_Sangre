@@ -1,7 +1,7 @@
 ﻿
 namespace Proyecto_Banco_De_Sangre
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -29,23 +29,26 @@ namespace Proyecto_Banco_De_Sangre
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Login));
             this.lblusuario = new System.Windows.Forms.Label();
             this.lbltitulo = new System.Windows.Forms.Label();
             this.txtcode = new System.Windows.Forms.TextBox();
             this.btnentrar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.QR = new System.Windows.Forms.PictureBox();
+            this.lblInvitación = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.QR)).BeginInit();
             this.SuspendLayout();
             // 
             // lblusuario
             // 
             this.lblusuario.AutoSize = true;
             this.lblusuario.BackColor = System.Drawing.Color.Transparent;
+            this.lblusuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblusuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblusuario.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.lblusuario.Location = new System.Drawing.Point(530, 284);
+            this.lblusuario.Location = new System.Drawing.Point(540, 290);
             this.lblusuario.Name = "lblusuario";
-            this.lblusuario.Size = new System.Drawing.Size(191, 17);
+            this.lblusuario.Size = new System.Drawing.Size(262, 25);
             this.lblusuario.TabIndex = 0;
             this.lblusuario.Text = "Escriba su código de usuario";
             this.lblusuario.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -54,29 +57,31 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.lbltitulo.AutoSize = true;
             this.lbltitulo.BackColor = System.Drawing.Color.Transparent;
-            this.lbltitulo.Font = new System.Drawing.Font("Impact", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltitulo.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbltitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lbltitulo.Location = new System.Drawing.Point(355, 167);
+            this.lbltitulo.Location = new System.Drawing.Point(290, 179);
             this.lbltitulo.Name = "lbltitulo";
-            this.lbltitulo.Size = new System.Drawing.Size(538, 53);
+            this.lbltitulo.Size = new System.Drawing.Size(752, 75);
             this.lbltitulo.TabIndex = 1;
             this.lbltitulo.Text = "Banco de Sangre \"La Merced\"";
             this.lbltitulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtcode
             // 
-            this.txtcode.Location = new System.Drawing.Point(547, 328);
+            this.txtcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcode.Location = new System.Drawing.Point(561, 345);
             this.txtcode.Name = "txtcode";
             this.txtcode.PasswordChar = '*';
-            this.txtcode.Size = new System.Drawing.Size(153, 22);
+            this.txtcode.Size = new System.Drawing.Size(204, 27);
             this.txtcode.TabIndex = 2;
             this.txtcode.TextChanged += new System.EventHandler(this.txtcode_TextChanged);
             // 
             // btnentrar
             // 
-            this.btnentrar.Location = new System.Drawing.Point(586, 367);
+            this.btnentrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnentrar.Location = new System.Drawing.Point(625, 412);
             this.btnentrar.Name = "btnentrar";
-            this.btnentrar.Size = new System.Drawing.Size(75, 23);
+            this.btnentrar.Size = new System.Drawing.Size(75, 36);
             this.btnentrar.TabIndex = 3;
             this.btnentrar.Text = "Entrar";
             this.btnentrar.UseVisualStyleBackColor = true;
@@ -94,19 +99,44 @@ namespace Proyecto_Banco_De_Sangre
             this.label1.TabIndex = 4;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // Form1
+            // QR
+            // 
+            this.QR.Image = ((System.Drawing.Image)(resources.GetObject("QR.Image")));
+            this.QR.Location = new System.Drawing.Point(1197, 572);
+            this.QR.Name = "QR";
+            this.QR.Size = new System.Drawing.Size(139, 137);
+            this.QR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.QR.TabIndex = 5;
+            this.QR.TabStop = false;
+            // 
+            // lblInvitación
+            // 
+            this.lblInvitación.AutoSize = true;
+            this.lblInvitación.BackColor = System.Drawing.Color.Transparent;
+            this.lblInvitación.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInvitación.Location = new System.Drawing.Point(1042, 617);
+            this.lblInvitación.Name = "lblInvitación";
+            this.lblInvitación.Size = new System.Drawing.Size(149, 50);
+            this.lblInvitación.TabIndex = 6;
+            this.lblInvitación.Text = "¿Quieres invitar\r\na alguien?";
+            this.lblInvitación.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1232, 634);
+            this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.Controls.Add(this.lblInvitación);
+            this.Controls.Add(this.QR);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnentrar);
             this.Controls.Add(this.txtcode);
             this.Controls.Add(this.lbltitulo);
             this.Controls.Add(this.lblusuario);
-            this.Name = "Form1";
+            this.Name = "Login";
             this.Text = "Inicio de Sesión";
+            ((System.ComponentModel.ISupportInitialize)(this.QR)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -119,6 +149,8 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.TextBox txtcode;
         private System.Windows.Forms.Button btnentrar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.PictureBox QR;
+        private System.Windows.Forms.Label lblInvitación;
     }
 }
 
