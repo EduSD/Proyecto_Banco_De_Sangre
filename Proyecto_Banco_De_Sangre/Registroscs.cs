@@ -13,7 +13,6 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Registroscs : Form
     {
         DataTable dt = new DataTable();
-        int id = 4;
         //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
@@ -37,7 +36,7 @@ namespace Proyecto_Banco_De_Sangre
         private void Registroscs_Load(object sender, EventArgs e)
         {
             dt.Columns.Add("ID");
-            dt.Columns.Add("NOMBRE");
+            dt.Columns.Add("NOMBRE_D");
             dt.Columns.Add("EDAD");
             dt.Columns.Add("T_SANGRE");
             dt.Columns.Add("MILILITROS_D");
@@ -51,88 +50,73 @@ namespace Proyecto_Banco_De_Sangre
             {
                 string nombreDonante = txtnombre.Text;
                 int litrosDonados = int.Parse(txtlitros2.Text);
-                // Aquí validamos los "litros" a donar
-                if (litrosDonados > 2)
+
+                // Validación de cantidad de litros donados
+                if (litrosDonados > 450)
                 {
-                    MessageBox.Show("Recuerda que los pacientes n puedes donar más de 2 litros de sangre por donación. Por favor, verifica la cantidad ingresada.");
+                    MessageBox.Show("No puedes donar más de 450 Mililitros.");
                     return;
                 }
-                // Validación del sistema, en busca de donaciones previas
-                if (!PuedeDonar(nombreDonante))
-                {
-                    return;
-                }
-                // Si pasa las validaciones anteriores en este punto, procede a agregar el registro
+
+                // Validación del tiempo entre donaciones
+            
+
+                DateTime fechaDonacion = DateTime.Today;
+
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
                     conexion.Open();
-                    string query = "INSERT INTO Registros (ID, NOMBRE, EDAD, T_SANGRE, MILILITROS, FECHA_D,) VALUES (@ID, @NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS, @FECHA_D)";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+
+                    // Insertar en la tabla Registros
+                    string queryInsertRegistros = "INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
+                    using (SqlCommand cmd = new SqlCommand(queryInsertRegistros, conexion))
                     {
-                        cmd.Parameters.AddWithValue("@ID", id++);
-                        cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
-                        cmd.Parameters.AddWithValue("@Edad", int.Parse(txtedad.Text));
-                        cmd.Parameters.AddWithValue("@Sangre", txtsangre.Text);
-                        cmd.Parameters.AddWithValue("@Fecha", DateTime.Today);
-                        cmd.Parameters.AddWithValue("@Litros", litrosDonados);
-                     /*   cmd.Parameters.AddWithValue("@Estado", "Donado");
-                        cmd.Parameters.AddWithValue("@S_Caducidad", DateTime.Today.AddDays(42));*/
+                        cmd.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
+                        cmd.Parameters.AddWithValue("@EDAD", int.Parse(txtedad.Text));
+                        cmd.Parameters.AddWithValue("@T_SANGRE", txtsangre.Text);
+                        cmd.Parameters.AddWithValue("@MILILITROS_D", litrosDonados);
+                        cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Now.Date);
                         cmd.ExecuteNonQuery();
                     }
+
+                    // Insertar en la tabla Sangre desde Registros
+                    string queryInsertSangre = @"
+                INSERT INTO Sangre (T_SANGRE, MILILITROS_D, FECHA_D, ESTATUS)
+                SELECT T_SANGRE, MILILITROS_D, FECHA_D, 
+                    CASE 
+                        WHEN DATEDIFF(DAY, FECHA_D, GETDATE()) > 42 THEN 'Caducada'
+                        ELSE 'Disponible'
+                    END 
+                FROM Registros 
+                WHERE NOMBRE_C = @NOMBRE_C AND FECHA_D = @FECHA_D";
+
+                    using (SqlCommand cmdSangre = new SqlCommand(queryInsertSangre, conexion))
+                    {
+                        cmdSangre.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
+                        cmdSangre.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
+                        cmdSangre.ExecuteNonQuery();
+                    }
                 }
+
                 CargarDatos();
             }
             catch (FormatException)
             {
-                MessageBox.Show("Por favor, ingresa valores numéricos válidos en los campos de Edad y Litros. Asegúrate de que no haya letras o símbolos.");
+                MessageBox.Show("Ingrese valores numéricos en Edad y Litros.");
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error al registrar la donación. Por favor, verifica la conexión a la base de datos o contacta al administrador.\nDetalles del error: {ex.Message}");
+                MessageBox.Show($"Error en la base de datos: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurrió un error inesperado al procesar la donación. Por favor, intenta nuevamente o contacta al administrador.\nDetalles del error: {ex.Message}");
+                MessageBox.Show($"Error inesperado: {ex.Message}");
             }
-        }
-        private bool PuedeDonar(string nombreDonante)
-        {
-            try
-            {
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT MAX(Fecha) FROM Registros WHERE Nombre = @Nombre";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
-                        object resultado = cmd.ExecuteScalar();
 
-                        if (resultado != DBNull.Value && resultado != null)
-                        {
-                            DateTime ultimaDonacion = Convert.ToDateTime(resultado);
-                            DateTime proximaDonacionPermitida = ultimaDonacion.AddDays(56);
-                            if (DateTime.Today < proximaDonacionPermitida)
-                            {
-                                TimeSpan tiempoRestante = proximaDonacionPermitida - DateTime.Today;
-                                MessageBox.Show($"El paciente aún no puede donar. Debe esperar {tiempoRestante.Days} días para que su cuerpo se recupere completamente.");
-                                return false;
-                            }
-                        }
-                        return true;
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Error al verificar donaciones previas. Por favor, verifica la conexión a la base de datos o contacta al administrador de TI.\nDetalles del error: {ex.Message}");
-                return false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ocurrió un error inesperado al verificar donaciones previas. Por favor, contacta al administrador de TI.\nDetalles del error: {ex.Message}");
-                return false;
-            }
+            txtedad.Text = " ";
+            txtlitros2.Text = " ";
+            txtnombre.Text = " ";
+            txtsangre.Text = "";
         }
         private void btnReportes_Click(object sender, EventArgs e)
         {
@@ -146,15 +130,16 @@ namespace Proyecto_Banco_De_Sangre
             {
                 if (dtw_Registro.SelectedRows.Count > 0)
                 {
-                    int idRegistro = Convert.ToInt32(dtw_Registro.SelectedRows[0].Cells["Nombre"].Value);
+                    int idRegistro = Convert.ToInt32(dtw_Registro.SelectedRows[0].Cells["ID"].Value);
 
-                    // Mensaje de confirmación para evitar pérdidas de registros NO planeadas
+                    // Confirmación antes de eliminar
                     DialogResult resultado = MessageBox.Show(
-                        "Espera ¿Estás seguro de que deseas eliminar este registro? Recuerda que esta acción no se puede deshacer.",
+                        "¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.",
                         "Confirmar eliminación",
                         MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
+                        MessageBoxIcon.Warning
                     );
+
                     if (resultado == DialogResult.Yes)
                     {
                         using (SqlConnection conexion = new SqlConnection(conexionString))
@@ -168,8 +153,8 @@ namespace Proyecto_Banco_De_Sangre
                                 cmd.ExecuteNonQuery();
                             }
                         }
-                        CargarDatos();
-                        MessageBox.Show("Registro eliminado correctamente. Gracias por tu atención.");
+                        CargarDatos(); // Recargar los datos para actualizar la tabla
+                        MessageBox.Show("Registro eliminado correctamente.");
                     }
                 }
                 else
@@ -179,11 +164,11 @@ namespace Proyecto_Banco_De_Sangre
             }
             catch (SqlException ex)
             {
-                MessageBox.Show($"Error al eliminar el registro. Por favor, contacta al administrador.\nDetalles del error: {ex.Message}");
+                MessageBox.Show($"Error al eliminar el registro: {ex.Message}");
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ocurrió un error inesperado al eliminar el registro. Por favor, intenta nuevamente o contacta al administrador.\nDetalles del error: {ex.Message}");
+                MessageBox.Show($"Error inesperado: {ex.Message}");
             }
         }
         // Nos daban algunos errores en el codigo por eso el catch para excepciones
