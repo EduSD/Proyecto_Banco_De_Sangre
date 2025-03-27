@@ -22,16 +22,30 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void CargarDatos()
         {
-            using (SqlConnection conexion = new SqlConnection(conexionString))
+            try
             {
-                conexion.Open();
-                string query = "SELECT * FROM Registros";
-                using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
+                // Limpiar el DataTable antes de volver a llenarlo
+                dt.Clear();
+
+                using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
-                    da.Fill(dt);
+                    conexion.Open();
+                    string query = "SELECT * FROM Registros";
+                    using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
+                    {
+                        da.Fill(dt);
+                    }
                 }
+                dtw_Registro.DataSource = dt;
             }
-            dtw_Registro.DataSource = dt;
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Error al cargar los datos: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}");
+            }
         }
         private void Registroscs_Load(object sender, EventArgs e)
         {
@@ -98,7 +112,6 @@ namespace Proyecto_Banco_De_Sangre
                     }
                 }
 
-                CargarDatos();
             }
             catch (FormatException)
             {
@@ -117,6 +130,8 @@ namespace Proyecto_Banco_De_Sangre
             txtlitros2.Text = " ";
             txtnombre.Text = " ";
             txtsangre.Text = "";
+            CargarDatos();
+
         }
         private void btnReportes_Click(object sender, EventArgs e)
         {
@@ -128,13 +143,12 @@ namespace Proyecto_Banco_De_Sangre
         {
             try
             {
-                if (dtw_Registro.SelectedRows.Count > 0)
+                // Obtener el ID del TextBox
+                if (int.TryParse(txtID.Text, out int idRegistro))
                 {
-                    int idRegistro = Convert.ToInt32(dtw_Registro.SelectedRows[0].Cells["ID"].Value);
-
                     // Confirmación antes de eliminar
                     DialogResult resultado = MessageBox.Show(
-                        "¿Estás seguro de que deseas eliminar este registro? Esta acción no se puede deshacer.",
+                        "¿Estás seguro de que deseas eliminar el registro con ID " + idRegistro + "? Esta acción no se puede deshacer.",
                         "Confirmar eliminación",
                         MessageBoxButtons.YesNo,
                         MessageBoxIcon.Warning
@@ -150,16 +164,24 @@ namespace Proyecto_Banco_De_Sangre
                             using (SqlCommand cmd = new SqlCommand(query, conexion))
                             {
                                 cmd.Parameters.AddWithValue("@ID", idRegistro);
-                                cmd.ExecuteNonQuery();
+                                int filasAfectadas = cmd.ExecuteNonQuery();
+
+                                if (filasAfectadas > 0)
+                                {
+                                    CargarDatos(); // Recargar los datos para actualizar la tabla
+                                    MessageBox.Show("Registro eliminado correctamente.");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("No se encontró ningún registro con el ID especificado.");
+                                }
                             }
                         }
-                        CargarDatos(); // Recargar los datos para actualizar la tabla
-                        MessageBox.Show("Registro eliminado correctamente.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor, selecciona un registro para eliminar.");
+                    MessageBox.Show("Por favor, ingresa un ID válido.");
                 }
             }
             catch (SqlException ex)
@@ -170,152 +192,135 @@ namespace Proyecto_Banco_De_Sangre
             {
                 MessageBox.Show($"Error inesperado: {ex.Message}");
             }
+            CargarDatos();
+
+
+            txtID.Enabled = false;
+            btnConsultar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            txtnombre.Enabled = true;
+            txtedad.Enabled = true;
+            txtsangre.Enabled = true;
+            txtlitros2.Enabled = true;
+
         }
         // Nos daban algunos errores en el codigo por eso el catch para excepciones
         private void btnModificar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (dtw_Registro.SelectedRows.Count > 0)
-                {
-                    int idRegistro = Convert.ToInt32(dtw_Registro.SelectedRows[0].Cells["ID"].Value);
-                    // Mensaje de confirmación para que el enfermero que capture CONFIRME y no se equivoque
-                    DialogResult resultado = MessageBox.Show(
-                        "¿Desea guardar los cambios realizados en el registro seleccionado?",
-                        "Confirmar modificación",
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question
-                    );
-                    if (resultado == DialogResult.Yes)
-                    {
-                        // Deshabilitar edición mientras se guarda, porque de lo contrario colapsa
-                        dtw_Registro.ReadOnly = true;
-                        // Obtener los valores modificados del DataGridView para que podamos guardarlo correctamente
-                        DataGridViewRow filaSeleccionada = dtw_Registro.SelectedRows[0];
-                        string nombre = filaSeleccionada.Cells["Nombre"].Value.ToString();
-                        int edad = Convert.ToInt32(filaSeleccionada.Cells["Edad"].Value);
-                        string sangre = filaSeleccionada.Cells["Sangre"].Value.ToString();
-                        string cronica = filaSeleccionada.Cells["Crónica"].Value.ToString();
-                        DateTime fecha = Convert.ToDateTime(filaSeleccionada.Cells["Fecha"].Value); // Obtener la fecha modificada
-                        string estado = filaSeleccionada.Cells["Estado"].Value.ToString();
-                        int diasRestantes = Convert.ToInt32(filaSeleccionada.Cells["DiasRestantes"].Value);
-                        // Actualizar la base de datos
-                        using (SqlConnection conexion = new SqlConnection(conexionString))
-                        {
-                            conexion.Open();
-                            string query = "UPDATE Registros SET Nombre = @Nombre, Edad = @Edad, T_Sangre = @Sangre, E_Cronica = @Cronica, Fecha = @Fecha, Estado = @Estado, DiasRestantes = @DiasRestantes WHERE ID = @ID";
+            txtID.Enabled=true;
+            btnConsultar.Enabled = true;
+            btnEliminar.Enabled = true;
 
-                            using (SqlCommand cmd = new SqlCommand(query, conexion))
-                            {
-                                cmd.Parameters.AddWithValue("@ID", idRegistro);
-                                cmd.Parameters.AddWithValue("@Nombre", nombre);
-                                cmd.Parameters.AddWithValue("@Edad", edad);
-                                cmd.Parameters.AddWithValue("@Sangre", sangre);
-                                cmd.Parameters.AddWithValue("@Cronica", cronica);
-                                cmd.Parameters.AddWithValue("@Fecha", fecha); // Usar la fecha modificada
-                                cmd.Parameters.AddWithValue("@Estado", estado);
-                                cmd.Parameters.AddWithValue("@DiasRestantes", diasRestantes);
-                                cmd.ExecuteNonQuery();
-                            }
-                        }
-                        // Habilitar edición y actualizar DataGridView con nuestro método
-                        dtw_Registro.ReadOnly = false;
-                        CargarDatos();
-                        MessageBox.Show("¡Excelente! La información del paciente ha sido actualizada correctamente. Gracias por su valioso trabajo.");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Por favor, seleccione un registro para modificar.");
-                }
-            // Los catch son porque en algunas ocasiones los equipos colapsaban
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Por favor, asegúrese de que los campos numéricos (Edad, DiasRestantes) contengan valores válidos.");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Ha ocurrido un error al intentar modificar la información. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-            }
+            txtnombre.Enabled = false;
+            txtedad.Enabled = false;
+            txtsangre.Enabled = false;
+            txtlitros2.Enabled = false;
+
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Traemos los valores de los TextBox
-                string nombre = txtnombre.Text;
-                string edad = txtedad.Text;
-                string sangre = txtsangre.Text;
-                string litros = txtlitros2.Text;
-                // Crear la consulta SQL dinámica
-                string query = "SELECT * FROM Registros WHERE 1 = 1";
-                if (!string.IsNullOrEmpty(nombre))
+            
+             
+
+                try
                 {
-                    query += " AND Nombre LIKE @Nombre";
-                }
-                if (!string.IsNullOrEmpty(edad))
-                {
-                    query += " AND Edad = @Edad";
-                }
-                if (!string.IsNullOrEmpty(sangre))
-                {
-                    query += " AND T_Sangre LIKE @Sangre"; // Cambio a LIKE para búsqueda parcial
-                }
-              
-                if (!string.IsNullOrEmpty(litros))
-                {
-                    query += " AND Litros = @Litros";
-                }
-                // Ejecutar la consulta y cargar los datos en el DataGridView
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    // Traemos los valores de los TextBox
+                    string id = txtID.Text; // TextBox para el ID
+                    string nombre = txtnombre.Text;
+                    string edad = txtedad.Text;
+                    string sangre = txtsangre.Text;
+                    string litros = txtlitros2.Text;
+
+                    // Crear la consulta SQL dinámica
+                    string query = "SELECT * FROM Registros WHERE 1 = 1";
+
+                    if (!string.IsNullOrEmpty(id))
                     {
-                        // Agregar parámetros a la consulta
-                        if (!string.IsNullOrEmpty(nombre))
+                        query += " AND ID = @ID";
+                    }
+
+                    if (!string.IsNullOrEmpty(nombre))
+                    {
+                        query += " AND NOMBRE_C LIKE @Nombre";
+                    }
+                    if (!string.IsNullOrEmpty(edad))
+                    {
+                        query += " AND EDAD = @Edad";
+                    }
+                    if (!string.IsNullOrEmpty(sangre))
+                    {
+                        query += " AND T_SANGRE LIKE @Sangre";
+                    }
+                    if (!string.IsNullOrEmpty(litros))
+                    {
+                        query += " AND MILILITROS_D = @Litros";
+                    }
+
+                    // Ejecutar la consulta y cargar los datos en el DataGridView
+                    using (SqlConnection conexion = new SqlConnection(conexionString))
+                    {
+                        conexion.Open();
+                        using (SqlCommand cmd = new SqlCommand(query, conexion))
                         {
-                            cmd.Parameters.AddWithValue("@Nombre", "%" + nombre + "%");
+                            // Agregar parámetros a la consulta
+                            if (!string.IsNullOrEmpty(id))
+                            {
+                                cmd.Parameters.AddWithValue("@ID", id);
+                            }
+                            if (!string.IsNullOrEmpty(nombre))
+                            {
+                                cmd.Parameters.AddWithValue("@Nombre", "%" + nombre + "%");
+                            }
+                            if (!string.IsNullOrEmpty(edad))
+                            {
+                                cmd.Parameters.AddWithValue("@Edad", edad);
+                            }
+                            if (!string.IsNullOrEmpty(sangre))
+                            {
+                                cmd.Parameters.AddWithValue("@Sangre", "%" + sangre + "%");
+                            }
+                            if (!string.IsNullOrEmpty(litros))
+                            {
+                                cmd.Parameters.AddWithValue("@Litros", litros);
+                            }
+
+                            // Crear un DataTable para almacenar los resultados
+                            DataTable dtConsulta = new DataTable();
+                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                            {
+                                da.Fill(dtConsulta);
+                            }
+                            // Asignar el DataTable al DataGridView
+                            dtw_Registro.DataSource = dtConsulta;
                         }
-                        if (!string.IsNullOrEmpty(edad))
-                        {
-                            cmd.Parameters.AddWithValue("@Edad", edad);
-                        }
-                        if (!string.IsNullOrEmpty(sangre))
-                        {
-                            cmd.Parameters.AddWithValue("@Sangre", "%" + sangre + "%"); // Usamos LIKE para búsqueda parcial
-                        }
-                      
-                        if (!string.IsNullOrEmpty(litros))
-                        {
-                            cmd.Parameters.AddWithValue("@Litros", litros);
-                        }
-                        // Crear un DataTable para almacenar los resultados
-                        DataTable dtConsulta = new DataTable();
-                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                        {
-                            da.Fill(dtConsulta);
-                        }
-                        // Asignar el DataTable al DataGridView
-                        dtw_Registro.DataSource = dtConsulta;
                     }
                 }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Ha ocurrido un error al realizar la consulta. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-            }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show($"Ha ocurrido un error al realizar la consulta. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+                }
+
+            txtID.Enabled = false;
+            btnConsultar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            txtnombre.Enabled = true;
+            txtedad.Enabled = true;
+            txtsangre.Enabled = true;
+            txtlitros2.Enabled = true;
+
+
+
         }
+
+
+
     }
            
 }

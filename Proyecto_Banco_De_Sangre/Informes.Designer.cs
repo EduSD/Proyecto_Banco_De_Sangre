@@ -35,10 +35,6 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fRHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechaCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.litrosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
             this.bancosangreDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -49,6 +45,10 @@ namespace Proyecto_Banco_De_Sangre
             this.sangreTableAdapter = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1TableAdapters.SangreTableAdapter();
             this.Litrostotales = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fRHDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechaCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.litrosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
@@ -107,7 +107,7 @@ namespace Proyecto_Banco_De_Sangre
             this.fechaCDataGridViewTextBoxColumn,
             this.litrosDataGridViewTextBoxColumn});
             this.dtw_Informes.DataSource = this.sangreBindingSource;
-            this.dtw_Informes.Location = new System.Drawing.Point(152, 325);
+            this.dtw_Informes.Location = new System.Drawing.Point(152, 301);
             this.dtw_Informes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtw_Informes.Name = "dtw_Informes";
             this.dtw_Informes.RowHeadersWidth = 51;
@@ -115,39 +115,6 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Informes.Size = new System.Drawing.Size(933, 319);
             this.dtw_Informes.TabIndex = 3;
             this.dtw_Informes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtw_Informes_CellContentClick);
-            // 
-            // tSangreDataGridViewTextBoxColumn
-            // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // fRHDataGridViewTextBoxColumn
-            // 
-            this.fRHDataGridViewTextBoxColumn.DataPropertyName = "F_RH";
-            this.fRHDataGridViewTextBoxColumn.HeaderText = "F_RH";
-            this.fRHDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fRHDataGridViewTextBoxColumn.Name = "fRHDataGridViewTextBoxColumn";
-            this.fRHDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // fechaCDataGridViewTextBoxColumn
-            // 
-            this.fechaCDataGridViewTextBoxColumn.DataPropertyName = "Fecha_C";
-            this.fechaCDataGridViewTextBoxColumn.HeaderText = "Fecha_C";
-            this.fechaCDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.fechaCDataGridViewTextBoxColumn.Name = "fechaCDataGridViewTextBoxColumn";
-            this.fechaCDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.fechaCDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // litrosDataGridViewTextBoxColumn
-            // 
-            this.litrosDataGridViewTextBoxColumn.DataPropertyName = "Litros";
-            this.litrosDataGridViewTextBoxColumn.HeaderText = "Litros";
-            this.litrosDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.litrosDataGridViewTextBoxColumn.Name = "litrosDataGridViewTextBoxColumn";
-            this.litrosDataGridViewTextBoxColumn.Width = 125;
             // 
             // sangreBindingSource
             // 
@@ -208,6 +175,39 @@ namespace Proyecto_Banco_De_Sangre
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fRHDataGridViewTextBoxColumn
+            // 
+            this.fRHDataGridViewTextBoxColumn.DataPropertyName = "MILILITROS_D";
+            this.fRHDataGridViewTextBoxColumn.HeaderText = "Militros_D";
+            this.fRHDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fRHDataGridViewTextBoxColumn.Name = "fRHDataGridViewTextBoxColumn";
+            this.fRHDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fechaCDataGridViewTextBoxColumn
+            // 
+            this.fechaCDataGridViewTextBoxColumn.DataPropertyName = "FECHA_D";
+            this.fechaCDataGridViewTextBoxColumn.HeaderText = "Fecha_C";
+            this.fechaCDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fechaCDataGridViewTextBoxColumn.Name = "fechaCDataGridViewTextBoxColumn";
+            this.fechaCDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.fechaCDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // litrosDataGridViewTextBoxColumn
+            // 
+            this.litrosDataGridViewTextBoxColumn.DataPropertyName = "ESTATUS";
+            this.litrosDataGridViewTextBoxColumn.HeaderText = "Estatus";
+            this.litrosDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.litrosDataGridViewTextBoxColumn.Name = "litrosDataGridViewTextBoxColumn";
+            this.litrosDataGridViewTextBoxColumn.Width = 125;
+            // 
             // Informes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -251,10 +251,10 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.BindingSource sangreBindingSource;
         private banco_sangreDataSet1TableAdapters.SangreTableAdapter sangreTableAdapter;
         private System.Windows.Forms.Label Litrostotales;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fRHDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaCDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn litrosDataGridViewTextBoxColumn;
-        private System.Windows.Forms.Button button1;
     }
 }
