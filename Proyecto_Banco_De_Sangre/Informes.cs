@@ -117,7 +117,8 @@ namespace Proyecto_Banco_De_Sangre
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {/*
+            //salto
             if (comboBox1.Text.Equals("A+"))
             {
                 DataTable dt = new DataTable();
@@ -142,6 +143,8 @@ namespace Proyecto_Banco_De_Sangre
 
                 dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
             }
+
+            //salto
             else if (comboBox1.Text.Equals("A-"))
             {
                 DataTable dt = new DataTable();
@@ -163,7 +166,191 @@ namespace Proyecto_Banco_De_Sangre
                 dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
 
             }
+            else if (comboBox1.Text.Equals("B+"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
 
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+            //salto
+            else if (comboBox1.Text.Equals("B-"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+            //salto
+            else if (comboBox1.Text.Equals("AB+"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+            //salto
+            else if (comboBox1.Text.Equals("AB-"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+            //salto
+            else if (comboBox1.Text.Equals("O+"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+            //salto
+            else if (comboBox1.Text.Equals("O-"))
+            {
+                DataTable dt = new DataTable();
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT * FROM Sangre WHERE T_Sangre LIKE @T_Sangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@T_Sangre", "%" + comboBox1.Text + "%"); // Búsqueda flexible
+
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dt);
+                        }
+                    }
+                }
+
+                dtw_Informes.DataSource = dt; // Muestra los resultados en el DataGridView
+
+            }
+*/
+
+            if (!string.IsNullOrEmpty(comboBox1.Text))
+            {
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    string query = "SELECT SUM(MILILITROS_D) FROM Sangre WHERE T_Sangre = @TipoSangre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@TipoSangre", comboBox1.Text);
+
+                        object resultado = cmd.ExecuteScalar();
+
+                        if (resultado != DBNull.Value && resultado != null)
+                        {
+                            int totalMililitros = Convert.ToInt32(resultado);
+                            label3.Text = "La cantidad de Mililitros total es de: " + totalMililitros.ToString();
+                        }
+                        else
+                        {
+                            label3.Text = "No se tiene Sangre de este tipo de sangre";
+                        }
+                    }
+                }
+
+                // Actualizar el DataGridView con los datos filtrados
+                CargarDatosFiltrados(comboBox1.Text);
+            }
+            else
+            {
+                label3.Text = ""; // Limpiar el Label si no se selecciona un tipo de sangre
+                CargarDatos(); // Mostrar todos los datos en el DataGridView
+            }
+        }
+
+        private void CargarDatosFiltrados(string tipoSangre)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection conexion = new SqlConnection(conexionString))
+            {
+                conexion.Open();
+                string query = "SELECT * FROM Sangre WHERE T_Sangre = @TipoSangre";
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
+
+                    using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                    {
+                        da.Fill(dt);
+                    }
+                }
+            }
+            dtw_Informes.DataSource = dt;
         }
 
         // Aqui no se como quieres mostrar el informe con sangre de grupos compartidos o 1x1

@@ -49,6 +49,9 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void Registroscs_Load(object sender, EventArgs e)
         {
+            label5.Text = DateTime.Now.ToString("dd/mm/yyyy");
+
+
             dt.Columns.Add("ID");
             dt.Columns.Add("NOMBRE_D");
             dt.Columns.Add("EDAD");
@@ -64,6 +67,9 @@ namespace Proyecto_Banco_De_Sangre
             {
                 string nombreDonante = txtnombre.Text;
                 int litrosDonados = int.Parse(txtlitros2.Text);
+                DateTime fechaDonacion = DateTime.Today;
+                int edad = int.Parse(txtedad.Text);
+                string sangre = txtsangre.Text;
 
                 // Validación de cantidad de litros donados
                 if (litrosDonados > 450)
@@ -73,9 +79,11 @@ namespace Proyecto_Banco_De_Sangre
                 }
 
                 // Validación del tiempo entre donaciones
-            
-
-                DateTime fechaDonacion = DateTime.Today;
+                if (!PuedeDonar(nombreDonante, fechaDonacion))
+                {
+                    MessageBox.Show("No puedes donar sangre hasta que hayan pasado 64 días desde tu última donación.");
+                    return;
+                }
 
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
@@ -85,11 +93,11 @@ namespace Proyecto_Banco_De_Sangre
                     string queryInsertRegistros = "INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
                     using (SqlCommand cmd = new SqlCommand(queryInsertRegistros, conexion))
                     {
-                        cmd.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
-                        cmd.Parameters.AddWithValue("@EDAD", int.Parse(txtedad.Text));
+                        cmd.Parameters.AddWithValue("@NOMBRE_C", txtnombre.Text);
+                        cmd.Parameters.AddWithValue("@EDAD", txtedad.Text);
                         cmd.Parameters.AddWithValue("@T_SANGRE", txtsangre.Text);
-                        cmd.Parameters.AddWithValue("@MILILITROS_D", litrosDonados);
-                        cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Now.Date);
+                        cmd.Parameters.AddWithValue("@MILILITROS_D", int.Parse(txtlitros2.Text));
+                        cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Today);
                         cmd.ExecuteNonQuery();
                     }
 
@@ -112,6 +120,8 @@ namespace Proyecto_Banco_De_Sangre
                     }
                 }
 
+                CargarDatos();
+                MessageBox.Show("Donación registrada correctamente.");
             }
             catch (FormatException)
             {
@@ -126,11 +136,35 @@ namespace Proyecto_Banco_De_Sangre
                 MessageBox.Show($"Error inesperado: {ex.Message}");
             }
 
-            txtedad.Text = " ";
-            txtlitros2.Text = " ";
-            txtnombre.Text = " ";
+            txtedad.Text = "";
+            txtlitros2.Text = "";
+            txtnombre.Text = "";
             txtsangre.Text = "";
-            CargarDatos();
+        }
+
+        private bool PuedeDonar(string nombreDonante, DateTime fechaDonacion)
+        {
+            using (SqlConnection conexion = new SqlConnection(conexionString))
+            {
+                conexion.Open();
+                string query = "SELECT MAX(FECHA_D) FROM Registros WHERE NOMBRE_C = @Nombre";
+                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
+                    object resultado = cmd.ExecuteScalar();
+
+                    if (resultado != DBNull.Value && resultado != null)
+                    {
+                        DateTime ultimaDonacion = Convert.ToDateTime(resultado);
+                        TimeSpan diferencia = fechaDonacion - ultimaDonacion;
+                        return diferencia.TotalDays >= 64;
+                    }
+                    else
+                    {
+                        return true; // No hay donaciones anteriores, puede donar
+                    }
+                }
+            }
 
         }
         private void btnReportes_Click(object sender, EventArgs e)
@@ -212,99 +246,94 @@ namespace Proyecto_Banco_De_Sangre
             btnConsultar.Enabled = true;
             btnEliminar.Enabled = true;
 
-            txtnombre.Enabled = false;
+            //txtnombre.Enabled = false;
             txtedad.Enabled = false;
             txtsangre.Enabled = false;
             txtlitros2.Enabled = false;
+            btnAgregar.Enabled = false;
+
 
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
         {
-            
-             
 
-                try
+
+
+            try
+            {
+                // Traemos los valores de los TextBox
+                string nombre = txtnombre.Text;
+                string edad = txtedad.Text;
+                string sangre = txtsangre.Text;
+                string litros = txtlitros2.Text;
+
+                // Crear la consulta SQL dinámica
+                string query = "SELECT * FROM Registros WHERE 1 = 1";
+
+                if (!string.IsNullOrEmpty(nombre))
                 {
-                    // Traemos los valores de los TextBox
-                    string id = txtID.Text; // TextBox para el ID
-                    string nombre = txtnombre.Text;
-                    string edad = txtedad.Text;
-                    string sangre = txtsangre.Text;
-                    string litros = txtlitros2.Text;
+                    query += " AND NOMBRE_C LIKE @Nombre";
+                }
 
-                    // Crear la consulta SQL dinámica
-                    string query = "SELECT * FROM Registros WHERE 1 = 1";
+                if (!string.IsNullOrEmpty(edad))
+                {
+                    query += " AND EDAD = @Edad";
+                }
 
-                    if (!string.IsNullOrEmpty(id))
-                    {
-                        query += " AND ID = @ID";
-                    }
+                if (!string.IsNullOrEmpty(sangre))
+                {
+                    query += " AND T_SANGRE LIKE @Sangre";
+                }
 
-                    if (!string.IsNullOrEmpty(nombre))
-                    {
-                        query += " AND NOMBRE_C LIKE @Nombre";
-                    }
-                    if (!string.IsNullOrEmpty(edad))
-                    {
-                        query += " AND EDAD = @Edad";
-                    }
-                    if (!string.IsNullOrEmpty(sangre))
-                    {
-                        query += " AND T_SANGRE LIKE @Sangre";
-                    }
-                    if (!string.IsNullOrEmpty(litros))
-                    {
-                        query += " AND MILILITROS_D = @Litros";
-                    }
+                if (!string.IsNullOrEmpty(litros))
+                {
+                    query += " AND MILILITROS_D = @Litros";
+                }
 
-                    // Ejecutar la consulta y cargar los datos en el DataGridView
-                    using (SqlConnection conexion = new SqlConnection(conexionString))
+                // Ejecutar la consulta y cargar los datos en el DataGridView
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
-                        conexion.Open();
-                        using (SqlCommand cmd = new SqlCommand(query, conexion))
+                        // Agregar parámetros a la consulta
+                        if (!string.IsNullOrEmpty(nombre))
                         {
-                            // Agregar parámetros a la consulta
-                            if (!string.IsNullOrEmpty(id))
-                            {
-                                cmd.Parameters.AddWithValue("@ID", id);
-                            }
-                            if (!string.IsNullOrEmpty(nombre))
-                            {
-                                cmd.Parameters.AddWithValue("@Nombre", "%" + nombre + "%");
-                            }
-                            if (!string.IsNullOrEmpty(edad))
-                            {
-                                cmd.Parameters.AddWithValue("@Edad", edad);
-                            }
-                            if (!string.IsNullOrEmpty(sangre))
-                            {
-                                cmd.Parameters.AddWithValue("@Sangre", "%" + sangre + "%");
-                            }
-                            if (!string.IsNullOrEmpty(litros))
-                            {
-                                cmd.Parameters.AddWithValue("@Litros", litros);
-                            }
-
-                            // Crear un DataTable para almacenar los resultados
-                            DataTable dtConsulta = new DataTable();
-                            using (SqlDataAdapter da = new SqlDataAdapter(cmd))
-                            {
-                                da.Fill(dtConsulta);
-                            }
-                            // Asignar el DataTable al DataGridView
-                            dtw_Registro.DataSource = dtConsulta;
+                            cmd.Parameters.AddWithValue("@Nombre", "%" + nombre + "%");
                         }
+                        if (!string.IsNullOrEmpty(edad))
+                        {
+                            cmd.Parameters.AddWithValue("@Edad", edad);
+                        }
+                        if (!string.IsNullOrEmpty(sangre))
+                        {
+                            cmd.Parameters.AddWithValue("@Sangre", "%" + sangre + "%");
+                        }
+                        if (!string.IsNullOrEmpty(litros))
+                        {
+                            cmd.Parameters.AddWithValue("@Litros", litros);
+                        }
+
+                        // Crear un DataTable para almacenar los resultados
+                        DataTable dtConsulta = new DataTable();
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dtConsulta);
+                        }
+                        // Asignar el DataTable al DataGridView
+                        dtw_Registro.DataSource = dtConsulta;
                     }
                 }
-                catch (SqlException ex)
-                {
-                    MessageBox.Show($"Ha ocurrido un error al realizar la consulta. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
-                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error al realizar la consulta. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+            }
 
             txtID.Enabled = false;
             btnConsultar.Enabled = false;
@@ -314,7 +343,7 @@ namespace Proyecto_Banco_De_Sangre
             txtedad.Enabled = true;
             txtsangre.Enabled = true;
             txtlitros2.Enabled = true;
-
+            txtID.Text = " ";
 
 
         }
