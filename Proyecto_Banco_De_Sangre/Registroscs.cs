@@ -12,6 +12,9 @@ namespace Proyecto_Banco_De_Sangre
 {
     public partial class Registroscs : Form
     {
+
+
+
         DataTable dt = new DataTable();
         //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";

@@ -10,16 +10,29 @@ using System.Windows.Forms;
 
 namespace Proyecto_Banco_De_Sangre
 {
-    public partial class Login : Form
+   public partial class Login : Form
     {
         private int intentos = 0;
         private const int maxIntentos = 4;
+
+        // Variable privada para almacenar el usuario
+        private string _usuario;
+
+        // Propiedad pública para acceder al valor del TextBox
+        public string Usuario
+        {
+            get { return _usuario ?? txtcode.Text; }
+            set { _usuario = value; }
+        }
 
         public Login()
         {
             InitializeComponent();
             btnentrar.Enabled = false;
             txtcode.TextChanged += txtcode_TextChanged;
+
+            // Actualizar la variable cuando cambie el texto
+            txtcode.TextChanged += (sender, e) => Usuario = txtcode.Text;
         }
 
         private void txtcode_TextChanged(object sender, EventArgs e)
@@ -29,18 +42,19 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnentrar_Click(object sender, EventArgs e)
         {
-            if (txtcode.Text == "1234") // Validación para ingreso de usuario
+            // Usando la variable Usuario en lugar de txtcode.Text
+            if (Usuario == "1234")
             {
                 MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Registroscs frm = new Registroscs(); // Cambiado a Informes
+                Registroscs frm = new Registroscs();
                 frm.Show();
                 this.Hide();
             }
-            else //Negativa en caso de la contraseña estar mal
+            else
             {
                 intentos++;
-                if (intentos >= maxIntentos) // validacion para determinar una cantidad de intentos 
+                if (intentos >= maxIntentos)
                 {
                     MessageBox.Show("Has excedido el número de intentos.\n Favor de llamar a un supervisor", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     this.Close();
@@ -51,5 +65,11 @@ namespace Proyecto_Banco_De_Sangre
                 }
             }
         }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }
