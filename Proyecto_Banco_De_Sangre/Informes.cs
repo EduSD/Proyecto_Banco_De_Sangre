@@ -141,10 +141,9 @@ namespace Proyecto_Banco_De_Sangre
                             grafic.Text = " ";
 
                            
-                            for (int i = 1; i <= totalMililitros/100; i++)
+                            for (int i = 1; i <= totalMililitros/50; i++)
                             {
-                                grafic.Text += "█    ";
-
+                                grafic.Text += "│ ";
                             }
 
                         }

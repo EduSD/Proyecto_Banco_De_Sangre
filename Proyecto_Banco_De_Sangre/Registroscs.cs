@@ -7,11 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic; 
+
 
 namespace Proyecto_Banco_De_Sangre
 {
     public partial class Registroscs : Form
     {
+
+        private void limpiar ()
+        {
+            txtnombre.Text = " ";
+            txtedad.Text = " ";
+            txtlitros2.Text = " ";
+            txtsangre.Text = " ";
+        }
 
 
 
@@ -25,6 +35,7 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void CargarDatos()
         {
+            dt.Clear();
             try
             {
                 // Limpiar el DataTable antes de volver a llenarlo
@@ -36,6 +47,10 @@ namespace Proyecto_Banco_De_Sangre
                     using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
                     {
                         da.Fill(dt);
+
+                        DataTable dtLocal = new DataTable(); // Crear un nuevo DataTable local
+                        da.Fill(dtLocal); // Llenar con los resultados de la consulta
+                        dtw_Registro.DataSource = dtLocal; // Asignarlo al DataGridView
                     }
                 }
                 dtw_Registro.DataSource = dt;
@@ -55,6 +70,7 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 string nombreDonante = txtnombre.Text;
@@ -140,10 +156,7 @@ namespace Proyecto_Banco_De_Sangre
                 MessageBox.Show($"Error inesperado: {ex.Message}");
             }
 
-            txtedad.Text = "";
-            txtlitros2.Text = "";
-            txtnombre.Text = "";
-            txtsangre.Text = "";
+            limpiar();
         }
 
         private bool PuedeDonar(string nombreDonante, DateTime fechaDonacion)
@@ -267,16 +280,24 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnModificar_Click_1(object sender, EventArgs e)
         {
-            txtID.Enabled = true;
-            btnConsultar.Enabled = true;
-            btnEliminar.Enabled = true;
+            string validiar = Interaction.InputBox("Ingrese el codigo necesario:", "InputBox");
 
-            //txtnombre.Enabled = false;
-            txtedad.Enabled = false;
-            txtsangre.Enabled = false;
-            txtlitros2.Enabled = false;
-            btnAgregar.Enabled = false;
+            
+            if (validiar =="1982")
+            {
+                txtID.Enabled = true;
+                btnConsultar.Enabled = true;
+                btnEliminar.Enabled = true;
 
+                //txtnombre.Enabled = false;
+                txtedad.Enabled = false;
+                //txtsangre.Enabled = false;
+                txtlitros2.Enabled = false;
+                btnAgregar.Enabled = false;
+            }
+
+
+            CargarDatos();
 
         }
 
@@ -297,7 +318,7 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnConsultar_Click_1(object sender, EventArgs e)
         {
-
+            //con nombre
             try
             {
                 // Traemos los valores de los TextBox
@@ -373,15 +394,94 @@ namespace Proyecto_Banco_De_Sangre
                 MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
             }
 
+            //con tipo de sangre
+            try
+            {
+                // Traemos los valores de los controles
+                string nombre = txtnombre.Text;
+                string edad = txtedad.Text;
+                string sangre = txtsangre.SelectedItem?.ToString(); // ← ComboBox
+                string litros = txtlitros2.Text;
+
+                // Crear la consulta SQL dinámica
+                string query = "SELECT * FROM Registros WHERE 1 = 1";
+
+                if (!string.IsNullOrEmpty(nombre))
+                {
+                    query += " AND NOMBRE_C LIKE @Nombre";
+                }
+
+                if (!string.IsNullOrEmpty(edad))
+                {
+                    query += " AND EDAD = @Edad";
+                }
+
+                if (!string.IsNullOrEmpty(sangre))
+                {
+                    query += " AND T_SANGRE = @Sangre"; // ← Comparación exacta
+                }
+
+                if (!string.IsNullOrEmpty(litros))
+                {
+                    query += " AND MILILITROS_D = @Litros";
+                }
+
+                // Ejecutar la consulta y cargar los datos en el DataGridView
+                using (SqlConnection conexion = new SqlConnection(conexionString))
+                {
+                    conexion.Open();
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        // Agregar parámetros a la consulta
+                        if (!string.IsNullOrEmpty(nombre))
+                        {
+                            cmd.Parameters.AddWithValue("@Nombre", "%" + nombre + "%");
+                        }
+                        if (!string.IsNullOrEmpty(edad))
+                        {
+                            cmd.Parameters.AddWithValue("@Edad", edad);
+                        }
+                        if (!string.IsNullOrEmpty(sangre))
+                        {
+                            cmd.Parameters.AddWithValue("@Sangre", sangre); // ← Ya no lleva %
+                        }
+                        if (!string.IsNullOrEmpty(litros))
+                        {
+                            cmd.Parameters.AddWithValue("@Litros", litros);
+                        }
+
+                        // Crear un DataTable para almacenar los resultados
+                        DataTable dtConsulta = new DataTable();
+                        using (SqlDataAdapter da = new SqlDataAdapter(cmd))
+                        {
+                            da.Fill(dtConsulta);
+                        }
+
+                        // Asignar el DataTable al DataGridView
+                        dtw_Registro.DataSource = dtConsulta;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error al realizar la consulta. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
+            }
+
             txtID.Enabled = false;
             btnConsultar.Enabled = false;
             btnEliminar.Enabled = false;
 
-            txtnombre.Enabled = true;
+            //txtnombre.Enabled = false;
             txtedad.Enabled = true;
             txtsangre.Enabled = true;
             txtlitros2.Enabled = true;
-            txtID.Text = " ";
+            btnAgregar.Enabled = true;
+
+            limpiar();
 
         }
 
@@ -449,6 +549,7 @@ namespace Proyecto_Banco_De_Sangre
             txtedad.Enabled = true;
             txtsangre.Enabled = true;
             txtlitros2.Enabled = true;
+            txtID.Text = " ";
 
         }
     }

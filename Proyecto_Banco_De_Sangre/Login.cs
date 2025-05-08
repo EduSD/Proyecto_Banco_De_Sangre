@@ -42,6 +42,10 @@ namespace Proyecto_Banco_De_Sangre
 
         private void btnentrar_Click(object sender, EventArgs e)
         {
+
+
+          
+
             // Usando la variable Usuario en lugar de txtcode.Text
             if (Usuario == "1234")
             {
