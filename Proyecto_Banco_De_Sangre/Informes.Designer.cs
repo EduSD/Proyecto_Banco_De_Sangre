@@ -88,7 +88,7 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1.Location = new System.Drawing.Point(31, 140);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 28);
+            this.comboBox1.Size = new System.Drawing.Size(153, 28);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -101,6 +101,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label2.Size = new System.Drawing.Size(141, 33);
             this.label2.TabIndex = 2;
             this.label2.Text = "                     ";
+            this.label2.Click += new System.EventHandler(this.label2_Click_1);
             // 
             // dtw_Informes
             // 
@@ -195,7 +196,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(1192, 636);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(128, 55);
             this.button1.TabIndex = 5;
@@ -207,7 +208,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(93, 275);
+            this.label3.Location = new System.Drawing.Point(93, 274);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 24);
             this.label3.TabIndex = 6;
@@ -216,17 +217,17 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.grafic.AutoSize = true;
             this.grafic.BackColor = System.Drawing.Color.Transparent;
-            this.grafic.Location = new System.Drawing.Point(222, 79);
+            this.grafic.Location = new System.Drawing.Point(221, 79);
             this.grafic.Name = "grafic";
-            this.grafic.Size = new System.Drawing.Size(136, 17);
+            this.grafic.Size = new System.Drawing.Size(0, 17);
             this.grafic.TabIndex = 7;
-            this.grafic.Text = "................................";
             this.grafic.Click += new System.EventHandler(this.grafic_Click);
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(49, -2);
+            this.pictureBox1.Location = new System.Drawing.Point(290, 9);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(699, 308);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
