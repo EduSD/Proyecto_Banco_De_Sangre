@@ -26,9 +26,9 @@ namespace Proyecto_Banco_De_Sangre
 
 
         DataTable dt = new DataTable();
-        //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        //string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         public Registroscs()
         {
             InitializeComponent();
@@ -71,59 +71,66 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            
-            try
+            if (txtnombre.Text == " " || txtedad.Text == " " || txtsangre.Text == " " || txtlitros2.Text == " ")
             {
-                string nombreDonante = txtnombre.Text;
-                int litrosDonados = int.Parse(txtlitros2.Text);
-                DateTime fechaDonacion = DateTime.Today;
-                int edad = int.Parse(txtedad.Text);
-                string sangre = txtsangre.Text;
-
-                int fn = int.Parse(txtedad.Text);
-                int fa = Convert.ToInt32( DateTime.Now.ToString("yyyy"));
-                int d = fa - fn;
+                MessageBox.Show($"Favor de llenar los compos");
+            }
+            
 
 
-                if (d < 17)
+
+                try
                 {
-                    MessageBox.Show("No puedes donar sangre si eres menor de 17 años.");
-                    return; // Detener la ejecución del método
-                }
+                    string nombreDonante = txtnombre.Text;
+                    int litrosDonados = int.Parse(txtlitros2.Text);
+                    DateTime fechaDonacion = DateTime.Today;
+                    int edad = int.Parse(txtedad.Text);
+                    string sangre = txtsangre.Text;
+
+                    int fn = int.Parse(txtedad.Text);
+                    int fa = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
+                    int d = fa - fn;
 
 
-                // Validación de cantidad de litros donados
-                if (litrosDonados > 450)
-                {
-                    MessageBox.Show("No puedes donar más de 450 Mililitros.");
-                    return;
-                }
-
-                // Validación del tiempo entre donaciones
-                if (!PuedeDonar(nombreDonante, fechaDonacion))
-                {
-                    MessageBox.Show("No puedes donar sangre hasta que hayan pasado 64 días desde tu última donación.");
-                    return;
-                }
-
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-
-                    // Insertar en la tabla Registros
-                    string queryInsertRegistros = "INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
-                    using (SqlCommand cmd = new SqlCommand(queryInsertRegistros, conexion))
+                    if (d < 17)
                     {
-                        cmd.Parameters.AddWithValue("@NOMBRE_C", txtnombre.Text);
-                        cmd.Parameters.AddWithValue("@EDAD", txtedad.Text);
-                        cmd.Parameters.AddWithValue("@T_SANGRE", txtsangre.Text);
-                        cmd.Parameters.AddWithValue("@MILILITROS_D", int.Parse(txtlitros2.Text));
-                        cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Today);
-                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("No puedes donar sangre si eres menor de 17 años.");
+                        return; // Detener la ejecución del método
                     }
 
-                    // Insertar en la tabla Sangre desde Registros
-                    string queryInsertSangre = @"
+
+                    // Validación de cantidad de litros donados
+                    if (litrosDonados > 450)
+                    {
+                        MessageBox.Show("No puedes donar más de 450 Mililitros.");
+                        return;
+                    }
+
+                    // Validación del tiempo entre donaciones
+                    if (!PuedeDonar(nombreDonante, fechaDonacion))
+                    {
+                        MessageBox.Show("No puedes donar sangre hasta que hayan pasado 64 días desde tu última donación.");
+                        return;
+                    }
+
+                    using (SqlConnection conexion = new SqlConnection(conexionString))
+                    {
+                        conexion.Open();
+
+                        // Insertar en la tabla Registros
+                        string queryInsertRegistros = "INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
+                        using (SqlCommand cmd = new SqlCommand(queryInsertRegistros, conexion))
+                        {
+                            cmd.Parameters.AddWithValue("@NOMBRE_C", txtnombre.Text);
+                            cmd.Parameters.AddWithValue("@EDAD", txtedad.Text);
+                            cmd.Parameters.AddWithValue("@T_SANGRE", txtsangre.Text);
+                            cmd.Parameters.AddWithValue("@MILILITROS_D", int.Parse(txtlitros2.Text));
+                            cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Today);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Insertar en la tabla Sangre desde Registros
+                        string queryInsertSangre = @"
                 INSERT INTO Sangre (T_SANGRE, MILILITROS_D, FECHA_D, ESTATUS)
                 SELECT T_SANGRE, MILILITROS_D, FECHA_D, 
                     CASE 
@@ -133,57 +140,55 @@ namespace Proyecto_Banco_De_Sangre
                 FROM Registros 
                 WHERE NOMBRE_C = @NOMBRE_C AND FECHA_D = @FECHA_D";
 
-                    using (SqlCommand cmdSangre = new SqlCommand(queryInsertSangre, conexion))
-                    {
-                        cmdSangre.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
-                        cmdSangre.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
-                        cmdSangre.ExecuteNonQuery();
+                        using (SqlCommand cmdSangre = new SqlCommand(queryInsertSangre, conexion))
+                        {
+                            cmdSangre.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
+                            cmdSangre.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
+                            cmdSangre.ExecuteNonQuery();
+                        }
                     }
+
+                 
+                    MessageBox.Show("Donación registrada correctamente.");
                 }
 
-                CargarDatos();
-                MessageBox.Show("Donación registrada correctamente.");
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Ingrese valores numéricos en Edad y Litros.");
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show($"Error en la base de datos: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error inesperado: {ex.Message}");
-            }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show($"Error en la base de datos: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error inesperado: {ex.Message}");
+                }
+            CargarDatos();
 
             limpiar();
         }
 
         private bool PuedeDonar(string nombreDonante, DateTime fechaDonacion)
-        {
-            using (SqlConnection conexion = new SqlConnection(conexionString))
             {
-                conexion.Open();
-                string query = "SELECT MAX(FECHA_D) FROM Registros WHERE NOMBRE_C = @Nombre";
-                using (SqlCommand cmd = new SqlCommand(query, conexion))
+                using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
-                    cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
-                    object resultado = cmd.ExecuteScalar();
+                    conexion.Open();
+                    string query = "SELECT MAX(FECHA_D) FROM Registros WHERE NOMBRE_C = @Nombre";
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@Nombre", nombreDonante);
+                        object resultado = cmd.ExecuteScalar();
 
-                    if (resultado != DBNull.Value && resultado != null)
-                    {
-                        DateTime ultimaDonacion = Convert.ToDateTime(resultado);
-                        TimeSpan diferencia = fechaDonacion - ultimaDonacion;
-                        return diferencia.TotalDays >= 64;
-                    }
-                    else
-                    {
-                        return true; // No hay donaciones anteriores, puede donar
+                        if (resultado != DBNull.Value && resultado != null)
+                        {
+                            DateTime ultimaDonacion = Convert.ToDateTime(resultado);
+                            TimeSpan diferencia = fechaDonacion - ultimaDonacion;
+                            return diferencia.TotalDays >= 64;
+                        }
+                        else
+                        {
+                            return true; // No hay donaciones anteriores, puede donar
+                        }
                     }
                 }
-            }
-
+            
         }
         private void btnReportes_Click(object sender, EventArgs e)
         {
@@ -315,6 +320,8 @@ namespace Proyecto_Banco_De_Sangre
             dt.Columns.Add("FECHA_D");
             dtw_Registro.DataSource = dt;
             CargarDatos();
+
+            label5.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
         private void btnConsultar_Click_1(object sender, EventArgs e)
@@ -383,6 +390,7 @@ namespace Proyecto_Banco_De_Sangre
                         }
                         // Asignar el DataTable al DataGridView
                         dtw_Registro.DataSource = dtConsulta;
+                        
                     }
                 }
             }
@@ -394,6 +402,7 @@ namespace Proyecto_Banco_De_Sangre
             {
                 MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
             }
+           
 
             //con tipo de sangre
             try
@@ -419,7 +428,7 @@ namespace Proyecto_Banco_De_Sangre
 
                 if (!string.IsNullOrEmpty(sangre))
                 {
-                    query += " AND T_SANGRE = @Sangre"; // ← Comparación exacta
+                    query += " AND T_SANGRE = @Sangre"; 
                 }
 
                 if (!string.IsNullOrEmpty(litros))
@@ -471,6 +480,7 @@ namespace Proyecto_Banco_De_Sangre
             {
                 MessageBox.Show($"Ha ocurrido un error inesperado. Por favor, contacte al administrador.\nDetalles: {ex.Message}");
             }
+           
 
             txtID.Enabled = false;
             btnConsultar.Enabled = false;
@@ -483,6 +493,7 @@ namespace Proyecto_Banco_De_Sangre
             btnAgregar.Enabled = true;
 
             limpiar();
+          //actualizar la tabla para consultas seguidas
 
         }
 
@@ -557,6 +568,20 @@ namespace Proyecto_Banco_De_Sangre
         private void button1_Click(object sender, EventArgs e)
         {
             CargarDatos();
+            txtID.Enabled = false;
+            btnConsultar.Enabled = false;
+            btnEliminar.Enabled = false;
+
+            //txtnombre.Enabled = false;
+            txtedad.Enabled = true;
+            txtsangre.Enabled = true;
+            txtlitros2.Enabled = true;
+            btnAgregar.Enabled = true;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
            

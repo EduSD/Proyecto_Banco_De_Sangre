@@ -15,8 +15,8 @@ namespace Proyecto_Banco_De_Sangre
     public partial class Informes : Form
     {
         DataTable dt = new DataTable();
-        //tring conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
+        //string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
 
 
         public Informes()
@@ -141,9 +141,9 @@ namespace Proyecto_Banco_De_Sangre
                             grafic.Text = " ";
 
                            
-                            for (int i = 1; i <= totalMililitros/50; i++)
+                            for (int i = 1; i <= totalMililitros/100; i++)
                             {
-                                grafic.Text += "│ ";
+                                grafic.Text += "█ ";
                             }
 
                         }
@@ -225,6 +225,11 @@ namespace Proyecto_Banco_De_Sangre
         }
 
         private void grafic_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
         {
 
         }
