@@ -35,10 +35,11 @@ namespace Proyecto_Banco_De_Sangre
         }
         private void CargarDatos()
         {
-            dt.Clear();
+           dt.Clear();
+
             try
             {
-                // Limpiar el DataTable antes de volver a llenarlo
+             
 
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
@@ -46,10 +47,10 @@ namespace Proyecto_Banco_De_Sangre
                     string query = "SELECT * FROM Registros";
                     using (SqlDataAdapter da = new SqlDataAdapter(query, conexion))
                     {
-                        da.Fill(dt);
+                        
 
                         DataTable dtLocal = new DataTable(); // Crear un nuevo DataTable local
-                        da.Fill(dtLocal); // Llenar con los resultados de la consulta
+                        da.Fill(dt); // Llenar con los resultados de la consulta
                         dtw_Registro.DataSource = dtLocal; // Asignarlo al DataGridView
                     }
                 }
@@ -551,6 +552,11 @@ namespace Proyecto_Banco_De_Sangre
             txtlitros2.Enabled = true;
             txtID.Text = " ";
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CargarDatos();
         }
     }
            

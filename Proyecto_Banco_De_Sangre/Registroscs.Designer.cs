@@ -60,6 +60,7 @@ namespace Proyecto_Banco_De_Sangre
             this.txtID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -347,6 +348,16 @@ namespace Proyecto_Banco_De_Sangre
             this.label5.TabIndex = 23;
             this.label5.Text = ".";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(44, 155);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(111, 47);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "Actualizar Tabla";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Registroscs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -354,6 +365,7 @@ namespace Proyecto_Banco_De_Sangre
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtID);
@@ -417,5 +429,6 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn MILILITROS;
         private System.Windows.Forms.DataGridViewTextBoxColumn FECHA_D;
+        private System.Windows.Forms.Button button1;
     }
 }
