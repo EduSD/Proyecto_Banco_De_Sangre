@@ -27,9 +27,9 @@ namespace Proyecto_Banco_De_Sangre
 
 
         DataTable dt = new DataTable();
-        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
+        //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-        //string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         public Registroscs()
         {
             InitializeComponent();
