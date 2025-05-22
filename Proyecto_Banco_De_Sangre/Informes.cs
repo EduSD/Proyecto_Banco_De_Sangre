@@ -358,9 +358,9 @@ namespace Proyecto_Banco_De_Sangre
 
         
 
-        private void button2_Click(object sender, EventArgs e)
-        {
 
+        private void button3_Click_1(object sender, EventArgs e)
+        {
 
             // Verificar si hay datos en el DataGridView
             if (dtw_Informes.Rows.Count == 0) // Cambiado de dtw_Registro a dtw_Informes
@@ -434,7 +434,7 @@ namespace Proyecto_Banco_De_Sangre
             return field;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             CargarDatos();
             CargarGraficoTiposSangre();
