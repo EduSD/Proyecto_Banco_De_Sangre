@@ -103,7 +103,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label2.Size = new System.Drawing.Size(117, 26);
             this.label2.TabIndex = 2;
             this.label2.Text = "                     ";
-            this.label2.Click += new System.EventHandler(this.label2_Click_1);
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // dtw_Informes
             // 
@@ -254,7 +254,7 @@ namespace Proyecto_Banco_De_Sangre
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Informes";
             this.Text = "Informes";
-            this.Load += new System.EventHandler(this.Informes_Load_1);
+            this.Load += new System.EventHandler(this.Informes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).EndInit();
