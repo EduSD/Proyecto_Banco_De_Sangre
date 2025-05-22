@@ -21,7 +21,8 @@ namespace Proyecto_Banco_De_Sangre
         // No necesitas un DataTable global 'dt' si cada método de carga crea uno nuevo.
         // Lo dejo aquí si lo usas para otros fines que no se muestran.
         DataTable dt = new DataTable();
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        //string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
 
 
         public Informes()

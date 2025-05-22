@@ -49,8 +49,8 @@ namespace Proyecto_Banco_De_Sangre
             // Usando la variable Usuario en lugar de txtcode.Text
             if (Usuario == "1234")
             {
-               // MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                // MessageBox.Show("¡Bienvenido estimado usuario!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+               
                 Registroscs frm = new Registroscs();
                 frm.Show();
                 this.Hide();
@@ -65,7 +65,8 @@ namespace Proyecto_Banco_De_Sangre
                 }
                 else
                 {
-                    MessageBox.Show($"Estimado usuario, su código es incorrecto. Te quedan {maxIntentos - intentos} intentos. Sino recuerda su código vaya a RH por soporte para su código", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    // MessageBox.Show($"Estimado usuario, su código es incorrecto. Te quedan {maxIntentos - intentos} intentos. Sino recuerda su código vaya a RH por soporte para su código", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    errorProvider1.SetError(txtcode, "Estimado usuario, su código es incorrecto.");
                 }
             }
         }

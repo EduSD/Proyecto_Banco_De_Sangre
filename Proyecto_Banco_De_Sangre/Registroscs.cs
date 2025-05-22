@@ -27,9 +27,9 @@ namespace Proyecto_Banco_De_Sangre
 
 
         DataTable dt = new DataTable();
-        //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
+        string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=YAKUGAMER732\\SQLEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
-        string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
+        //string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         public Registroscs()
         {
             InitializeComponent();
@@ -623,7 +623,7 @@ namespace Proyecto_Banco_De_Sangre
                 {
                     using (StreamWriter sw = new StreamWriter(filePath, false, Encoding.UTF8)) // 'false' para sobrescribir
                     {
-                        // 1. Escribir encabezados de columna
+                        //  Escribir encabezados de columna
                         for (int i = 0; i < dtw_Registro.Columns.Count; i++)
                         {
                             sw.Write(EscapeCsvField(dtw_Registro.Columns[i].HeaderText));
@@ -634,7 +634,7 @@ namespace Proyecto_Banco_De_Sangre
                         }
                         sw.WriteLine(); // Nueva línea después de los encabezados
 
-                        // 2. Escribir filas de datos
+                        //  Escribir filas de datos
                         foreach (DataGridViewRow row in dtw_Registro.Rows)
                         {
                             // Ignorar la fila "nueva fila" si existe y no está comprometida
@@ -643,7 +643,7 @@ namespace Proyecto_Banco_De_Sangre
                             for (int i = 0; i < dtw_Registro.Columns.Count; i++)
                             {
                                 object cellValue = row.Cells[i].Value;
-                                string cellText = (cellValue == null) ? "" : cellValue.ToString();
+                                string cellText = (cellValue == null) ? " " : cellValue.ToString();
 
                                 sw.Write(EscapeCsvField(cellText));
                                 if (i < dtw_Registro.Columns.Count - 1)
