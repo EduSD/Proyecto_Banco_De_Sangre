@@ -439,6 +439,11 @@ namespace Proyecto_Banco_De_Sangre
             CargarDatos();
             CargarGraficoTiposSangre();
         }
+
+        private void grafica_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
