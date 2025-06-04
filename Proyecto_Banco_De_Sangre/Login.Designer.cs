@@ -49,7 +49,7 @@ namespace Proyecto_Banco_De_Sangre
             this.lblusuario.BackColor = System.Drawing.Color.Transparent;
             this.lblusuario.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblusuario.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblusuario.Location = new System.Drawing.Point(536, 290);
+            this.lblusuario.Location = new System.Drawing.Point(374, 187);
             this.lblusuario.Name = "lblusuario";
             this.lblusuario.Size = new System.Drawing.Size(267, 23);
             this.lblusuario.TabIndex = 0;
@@ -62,7 +62,7 @@ namespace Proyecto_Banco_De_Sangre
             this.lbltitulo.BackColor = System.Drawing.Color.Transparent;
             this.lbltitulo.Font = new System.Drawing.Font("Verdana", 36F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbltitulo.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lbltitulo.Location = new System.Drawing.Point(206, 176);
+            this.lbltitulo.Location = new System.Drawing.Point(144, 76);
             this.lbltitulo.Name = "lbltitulo";
             this.lbltitulo.Size = new System.Drawing.Size(927, 73);
             this.lbltitulo.TabIndex = 1;
@@ -72,7 +72,7 @@ namespace Proyecto_Banco_De_Sangre
             // txtcode
             // 
             this.txtcode.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtcode.Location = new System.Drawing.Point(567, 345);
+            this.txtcode.Location = new System.Drawing.Point(405, 242);
             this.txtcode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtcode.Name = "txtcode";
             this.txtcode.PasswordChar = '*';
@@ -90,7 +90,7 @@ namespace Proyecto_Banco_De_Sangre
             this.btnentrar.Font = new System.Drawing.Font("Book Antiqua", 10.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnentrar.Image = global::Proyecto_Banco_De_Sangre.Properties.Resources._146805;
             this.btnentrar.ImageKey = "(ninguno)";
-            this.btnentrar.Location = new System.Drawing.Point(616, 410);
+            this.btnentrar.Location = new System.Drawing.Point(454, 307);
             this.btnentrar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnentrar.Name = "btnentrar";
             this.btnentrar.Size = new System.Drawing.Size(107, 36);
@@ -114,7 +114,7 @@ namespace Proyecto_Banco_De_Sangre
             // QR
             // 
             this.QR.Image = ((System.Drawing.Image)(resources.GetObject("QR.Image")));
-            this.QR.Location = new System.Drawing.Point(1197, 572);
+            this.QR.Location = new System.Drawing.Point(932, 407);
             this.QR.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.QR.Name = "QR";
             this.QR.Size = new System.Drawing.Size(139, 137);
@@ -127,7 +127,7 @@ namespace Proyecto_Banco_De_Sangre
             this.lblInvitación.AutoSize = true;
             this.lblInvitación.BackColor = System.Drawing.Color.Transparent;
             this.lblInvitación.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInvitación.Location = new System.Drawing.Point(1043, 617);
+            this.lblInvitación.Location = new System.Drawing.Point(778, 452);
             this.lblInvitación.Name = "lblInvitación";
             this.lblInvitación.Size = new System.Drawing.Size(149, 50);
             this.lblInvitación.TabIndex = 6;
@@ -143,7 +143,7 @@ namespace Proyecto_Banco_De_Sangre
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.ClientSize = new System.Drawing.Size(1097, 547);
             this.Controls.Add(this.lblInvitación);
             this.Controls.Add(this.QR);
             this.Controls.Add(this.label1);

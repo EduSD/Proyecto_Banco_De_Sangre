@@ -38,10 +38,6 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
             this.bancosangreDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -55,6 +51,8 @@ namespace Proyecto_Banco_De_Sangre
             this.grafica = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
@@ -70,7 +68,7 @@ namespace Proyecto_Banco_De_Sangre
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(621, 48);
+            this.label1.Location = new System.Drawing.Point(521, 28);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(122, 20);
             this.label1.TabIndex = 0;
@@ -78,6 +76,8 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // comboBox1
             // 
+            this.comboBox1.BackColor = System.Drawing.Color.White;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -89,7 +89,7 @@ namespace Proyecto_Banco_De_Sangre
             "AB-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(608, 71);
+            this.comboBox1.Location = new System.Drawing.Point(498, 69);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(169, 28);
@@ -100,7 +100,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cambria", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1091, 9);
+            this.label2.Location = new System.Drawing.Point(917, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(141, 33);
             this.label2.TabIndex = 2;
@@ -111,52 +111,19 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.dtw_Informes.AllowUserToOrderColumns = true;
             this.dtw_Informes.AutoGenerateColumns = false;
+            this.dtw_Informes.BackgroundColor = System.Drawing.Color.Azure;
             this.dtw_Informes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dtw_Informes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.tSangreDataGridViewTextBoxColumn,
-            this.Column1,
-            this.Column2,
-            this.Column3});
+            this.Column1});
             this.dtw_Informes.DataSource = this.sangreBindingSource;
-            this.dtw_Informes.Location = new System.Drawing.Point(31, 311);
+            this.dtw_Informes.Location = new System.Drawing.Point(12, 221);
             this.dtw_Informes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtw_Informes.Name = "dtw_Informes";
             this.dtw_Informes.RowHeadersWidth = 51;
             this.dtw_Informes.RowTemplate.Height = 24;
-            this.dtw_Informes.Size = new System.Drawing.Size(657, 319);
+            this.dtw_Informes.Size = new System.Drawing.Size(482, 327);
             this.dtw_Informes.TabIndex = 3;
-            // 
-            // tSangreDataGridViewTextBoxColumn
-            // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "MILILITROS_D";
-            this.Column1.HeaderText = "Cantidad Disponible de Sangre";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "FECHA_D";
-            this.Column2.HeaderText = "Fecha de Donaciòn";
-            this.Column2.MinimumWidth = 6;
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            this.Column3.DataPropertyName = "ESTATUS";
-            this.Column3.HeaderText = "Estatus";
-            this.Column3.MinimumWidth = 6;
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 125;
             // 
             // sangreBindingSource
             // 
@@ -198,11 +165,11 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(1192, 636);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(18, 564);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(128, 55);
+            this.button1.Size = new System.Drawing.Size(110, 49);
             this.button1.TabIndex = 5;
             this.button1.Text = "Regresar";
             this.button1.UseVisualStyleBackColor = true;
@@ -212,7 +179,7 @@ namespace Proyecto_Banco_De_Sangre
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(573, 137);
+            this.label3.Location = new System.Drawing.Point(449, 147);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(0, 24);
             this.label3.TabIndex = 6;
@@ -223,7 +190,7 @@ namespace Proyecto_Banco_De_Sangre
             this.grafica.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.grafica.Legends.Add(legend1);
-            this.grafica.Location = new System.Drawing.Point(717, 302);
+            this.grafica.Location = new System.Drawing.Point(529, 221);
             this.grafica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grafica.Name = "grafica";
             series1.ChartArea = "ChartArea1";
@@ -237,32 +204,53 @@ namespace Proyecto_Banco_De_Sangre
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 241);
+            this.button2.BackColor = System.Drawing.SystemColors.Control;
+            this.button2.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(18, 128);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 49);
+            this.button2.Size = new System.Drawing.Size(146, 62);
             this.button2.TabIndex = 9;
-            this.button2.Text = "Actualizar Tabla";
-            this.button2.UseVisualStyleBackColor = true;
+            this.button2.TabStop = false;
+            this.button2.Text = "Actualizar  \r\ntabla";
+            this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(1211, 235);
+            this.button3.BackColor = System.Drawing.SystemColors.Control;
+            this.button3.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(977, 128);
             this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(109, 62);
+            this.button3.Size = new System.Drawing.Size(146, 62);
             this.button3.TabIndex = 10;
-            this.button3.Text = "Generar Reporte";
-            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Text = "Generar \r\nreporte";
+            this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "MILILITROS_D";
+            this.Column1.HeaderText = "Cantidad Disponible de Sangre";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
             // 
             // Informes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1348, 721);
+            this.ClientSize = new System.Drawing.Size(1150, 621);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.grafica);
@@ -314,7 +302,5 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
     }
 }
