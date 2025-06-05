@@ -203,7 +203,7 @@ namespace Proyecto_Banco_De_Sangre
             this.txtedad.MaxLength = 4;
             this.txtedad.Name = "txtedad";
             this.txtedad.Size = new System.Drawing.Size(103, 27);
-            this.txtedad.TabIndex = 3;
+            this.txtedad.TabIndex = 4;
             this.txtedad.TextChanged += new System.EventHandler(this.txtedad_TextChanged);
             this.txtedad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtedad_KeyPress);
             // 
