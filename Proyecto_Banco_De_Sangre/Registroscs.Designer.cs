@@ -57,7 +57,6 @@ namespace Proyecto_Banco_De_Sangre
             this.txtlitros2 = new System.Windows.Forms.TextBox();
             this.txtID = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
@@ -67,6 +66,10 @@ namespace Proyecto_Banco_De_Sangre
             this.errorProvider5 = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
+            this.lblbajo = new System.Windows.Forms.StatusStrip();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lblMensajeEstado = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -77,6 +80,7 @@ namespace Proyecto_Banco_De_Sangre
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).BeginInit();
+            this.lblbajo.SuspendLayout();
             this.SuspendLayout();
             // 
             // dATOSDataSet
@@ -196,9 +200,12 @@ namespace Proyecto_Banco_De_Sangre
             this.txtedad.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtedad.Location = new System.Drawing.Point(347, 62);
             this.txtedad.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtedad.MaxLength = 4;
             this.txtedad.Name = "txtedad";
             this.txtedad.Size = new System.Drawing.Size(103, 27);
             this.txtedad.TabIndex = 3;
+            this.txtedad.TextChanged += new System.EventHandler(this.txtedad_TextChanged);
+            this.txtedad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtedad_KeyPress);
             // 
             // txtsangre
             // 
@@ -214,7 +221,8 @@ namespace Proyecto_Banco_De_Sangre
             "AB+",
             "AB-",
             "O+",
-            "O-"});
+            "O-",
+            "    "});
             this.txtsangre.Location = new System.Drawing.Point(529, 61);
             this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsangre.Name = "txtsangre";
@@ -319,7 +327,7 @@ namespace Proyecto_Banco_De_Sangre
             this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtlitros2.Name = "txtlitros2";
             this.txtlitros2.Size = new System.Drawing.Size(76, 27);
-            this.txtlitros2.TabIndex = 20;
+            this.txtlitros2.TabIndex = 3;
             // 
             // txtID
             // 
@@ -341,16 +349,6 @@ namespace Proyecto_Banco_De_Sangre
             this.label4.Size = new System.Drawing.Size(111, 20);
             this.label4.TabIndex = 22;
             this.label4.Text = "Agregue el ID";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial Narrow", 22.2F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(984, 9);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 44);
-            this.label5.TabIndex = 23;
-            this.label5.Text = ".";
             // 
             // button1
             // 
@@ -434,16 +432,48 @@ namespace Proyecto_Banco_De_Sangre
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click_1);
             // 
+            // lblbajo
+            // 
+            this.lblbajo.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.lblbajo.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblMensajeEstado,
+            this.lblFechaHora});
+            this.lblbajo.Location = new System.Drawing.Point(0, 570);
+            this.lblbajo.Name = "lblbajo";
+            this.lblbajo.Size = new System.Drawing.Size(1273, 26);
+            this.lblbajo.TabIndex = 26;
+            this.lblbajo.Text = "Listo";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
+            // 
+            // lblMensajeEstado
+            // 
+            this.lblMensajeEstado.Name = "lblMensajeEstado";
+            this.lblMensajeEstado.Size = new System.Drawing.Size(37, 20);
+            this.lblMensajeEstado.Text = "listo";
+            this.lblMensajeEstado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblFechaHora
+            // 
+            this.lblFechaHora.Name = "lblFechaHora";
+            this.lblFechaHora.Size = new System.Drawing.Size(151, 20);
+            this.lblFechaHora.Text = "toolStripStatusLabel3";
+            this.lblFechaHora.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // Registroscs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(1273, 533);
+            this.ClientSize = new System.Drawing.Size(1273, 596);
+            this.Controls.Add(this.lblbajo);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtID);
             this.Controls.Add(this.txtlitros2);
@@ -475,6 +505,8 @@ namespace Proyecto_Banco_De_Sangre
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider5)).EndInit();
+            this.lblbajo.ResumeLayout(false);
+            this.lblbajo.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -503,7 +535,6 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.DataGridViewTextBoxColumn fechaDataGridViewTextBoxColumn;
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ErrorProvider errorProvider1;
@@ -519,5 +550,9 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.DataGridViewTextBoxColumn FECHA_D;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.StatusStrip lblbajo;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ToolStripStatusLabel lblMensajeEstado;
+        private System.Windows.Forms.ToolStripStatusLabel lblFechaHora;
     }
 }

@@ -129,33 +129,15 @@ namespace Proyecto_Banco_De_Sangre
             grafica.Palette = ChartColorPalette.Pastel; // O la paleta que prefieras
         }
 
-        // Aquí tienes dos métodos Informes_Load.
-        // DEBES ELEGIR SOLO UNO y eliminar el otro, o asegurarte de que solo uno esté suscrito al evento Load.
-        // El diseñador de Visual Studio generalmente vincula el evento Load al método 'Informes_Load_1' si lo creaste con doble click.
-
-        // OPCION A: Usar este como el único manejador de eventos Load (recomendado)
+  
         private void Informes_Load(object sender, EventArgs e)
         {
-            // Ya no necesitas dt.Columns.Add si CargarDatos() llena el DataGridView desde la BD.
-            // Si el DataGridView se autogenera columnas, esto podría ser redundante o causar problemas.
-            // dtw_Informes.DataSource = dt; // Esto puede vaciarlo si 'dt' global no está siendo llenado
-
+       
             CargarDatos();               // Carga los datos en el DataGridView
             CargarGraficoTiposSangre();  // Carga los datos en el Chart
-            label2.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
 
-        // OPCION B: Si 'Informes_Load_1' es el que está REALMENTE suscrito al evento Load en tu diseñador,
-        // entonces elimina el método 'Informes_Load' de arriba y modifica este:
-        /*
-        private void Informes_Load_1(object sender, EventArgs e)
-        {
-            CargarDatos();
-            CargarGraficoTiposSangre(); // Asegúrate de llamar a este método aquí
-            label2.Text = DateTime.Now.ToString("dd/MM/yyyy");
-            // Elimina el otro Informes_Load de tu código.
-        }
-        */
+      
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -443,6 +425,12 @@ namespace Proyecto_Banco_De_Sangre
 
         private void grafica_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
 
         }
     }

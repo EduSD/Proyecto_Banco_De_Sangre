@@ -36,7 +36,6 @@ namespace Proyecto_Banco_De_Sangre
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Informes));
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
             this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
@@ -53,6 +52,9 @@ namespace Proyecto_Banco_De_Sangre
             this.button3 = new System.Windows.Forms.Button();
             this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Informes)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sangreBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.banco_sangreDataSet1)).BeginInit();
@@ -61,6 +63,7 @@ namespace Proyecto_Banco_De_Sangre
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grafica)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -95,17 +98,6 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1.Size = new System.Drawing.Size(169, 28);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cambria", 16.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(917, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 33);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "                     ";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // dtw_Informes
             // 
@@ -245,19 +237,42 @@ namespace Proyecto_Banco_De_Sangre
             this.Column1.Name = "Column1";
             this.Column1.Width = 125;
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblFechaHora});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 648);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1150, 26);
+            this.statusStrip1.TabIndex = 11;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblFechaHora
+            // 
+            this.lblFechaHora.Name = "lblFechaHora";
+            this.lblFechaHora.Size = new System.Drawing.Size(151, 20);
+            this.lblFechaHora.Text = "toolStripStatusLabel1";
+            // 
             // Informes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(1150, 621);
+            this.ClientSize = new System.Drawing.Size(1150, 674);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.grafica);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dtw_Informes);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -273,6 +288,8 @@ namespace Proyecto_Banco_De_Sangre
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.registrosBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grafica)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -282,7 +299,6 @@ namespace Proyecto_Banco_De_Sangre
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dtw_Informes;
         private System.Windows.Forms.BindingSource bancosangreDataSetBindingSource;
         private banco_sangreDataSet banco_sangreDataSet;
@@ -302,5 +318,8 @@ namespace Proyecto_Banco_De_Sangre
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewTextBoxColumn tSangreDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblFechaHora;
     }
 }
