@@ -23,10 +23,8 @@ namespace Proyecto_Banco_De_Sangre
             InitializeComponent();
 
             // Configuración inicial de los TextBox
-            txtsangre.DropDownStyle = ComboBoxStyle.DropDownList; // Para que no se pueda escribir en el ComboBox
             txtnombre.MaxLength = 100;
-           
-
+            txtsangre.MaxLength = 0;
             txtedad.KeyPress += new KeyPressEventHandler(txtedad_KeyPress);
             txtlitros2.KeyPress += new KeyPressEventHandler(txtlitros2_KeyPress);
         }
@@ -346,7 +344,6 @@ namespace Proyecto_Banco_De_Sangre
             {
 
                 limpiar();
-
 
 
             }
@@ -703,17 +700,14 @@ namespace Proyecto_Banco_De_Sangre
                 e.Handled = true;
             }
         }
-        // Puedes eliminar txtedad_TextChanged y txtedad_Validating si ya no los usas
-        // Si los usas para validación final, considera el orden de ejecución con KeyPress.
+
         private void txtedad_TextChanged(object sender, EventArgs e)
         {
-            // Puedes dejar esto vacío si solo usas KeyPress para la validación de entrada en tiempo real.
-            // Si necesitas lógica adicional al cambiar el texto, agrégala aquí.
+           
         }
         private void txtedad_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            // Esta validación se disparará cuando el control pierda el foco.
-            // Es una buena capa de seguridad adicional, aunque KeyPress ya filtra la mayoría de los caracteres.
+  
             if (!string.IsNullOrEmpty(txtedad.Text.Trim()) && !int.TryParse(txtedad.Text.Trim(), out int edad))
             {
                 errorProvider4.SetError(txtedad, "Por favor, introduce solo números en este campo.");
@@ -724,14 +718,18 @@ namespace Proyecto_Banco_De_Sangre
             else
             {
                 errorProvider4.Clear();
-                // Si la validación pasa, y no hay otros errores, puedes restablecer el estado.
-                // Sin embargo, limpiar() ya se encarga de esto en los botones.
+               
             }
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
             lblFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void txtsangre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

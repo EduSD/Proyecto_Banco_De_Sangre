@@ -67,9 +67,9 @@ namespace Proyecto_Banco_De_Sangre
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.lblbajo = new System.Windows.Forms.StatusStrip();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblMensajeEstado = new System.Windows.Forms.ToolStripStatusLabel();
             this.lblFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dATOSDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aLUMNOSBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dtw_Registro)).BeginInit();
@@ -203,14 +203,13 @@ namespace Proyecto_Banco_De_Sangre
             this.txtedad.MaxLength = 4;
             this.txtedad.Name = "txtedad";
             this.txtedad.Size = new System.Drawing.Size(103, 27);
-            this.txtedad.TabIndex = 4;
+            this.txtedad.TabIndex = 0;
             this.txtedad.TextChanged += new System.EventHandler(this.txtedad_TextChanged);
             this.txtedad.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtedad_KeyPress);
             // 
             // txtsangre
             // 
             this.txtsangre.BackColor = System.Drawing.Color.White;
-            this.txtsangre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtsangre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtsangre.FormattingEnabled = true;
             this.txtsangre.Items.AddRange(new object[] {
@@ -221,13 +220,13 @@ namespace Proyecto_Banco_De_Sangre
             "AB+",
             "AB-",
             "O+",
-            "O-",
-            "    "});
+            "O-"});
             this.txtsangre.Location = new System.Drawing.Point(529, 61);
             this.txtsangre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtsangre.Name = "txtsangre";
             this.txtsangre.Size = new System.Drawing.Size(113, 28);
             this.txtsangre.TabIndex = 7;
+            this.txtsangre.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtsangre_KeyPress);
             // 
             // label1
             // 
@@ -444,12 +443,6 @@ namespace Proyecto_Banco_De_Sangre
             this.lblbajo.TabIndex = 26;
             this.lblbajo.Text = "Listo";
             // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
-            // 
             // lblMensajeEstado
             // 
             this.lblMensajeEstado.Name = "lblMensajeEstado";
@@ -463,6 +456,12 @@ namespace Proyecto_Banco_De_Sangre
             this.lblFechaHora.Size = new System.Drawing.Size(151, 20);
             this.lblFechaHora.Text = "toolStripStatusLabel3";
             this.lblFechaHora.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // Registroscs
             // 
