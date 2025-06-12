@@ -18,8 +18,7 @@ namespace Proyecto_Banco_De_Sangre
 {
     public partial class Informes : Form
     {
-        // No necesitas un DataTable global 'dt' si cada método de carga crea uno nuevo.
-        // Lo dejo aquí si lo usas para otros fines que no se muestran.
+       
         DataTable dt = new DataTable();
         string conexionString = "Server=DESKTOP-NC4SAIF\\SQÑEXPRESS;Database=banco_sangre;Trusted_Connection=True;";
         //string conexionString = "Server=L402-M6;Database=banco_sangre;Trusted_Connection=True;";
@@ -132,78 +131,67 @@ namespace Proyecto_Banco_De_Sangre
   
         private void Informes_Load(object sender, EventArgs e)
         {
-       
-            CargarDatos();               // Carga los datos en el DataGridView
-            CargarGraficoTiposSangre();  // Carga los datos en el Chart
+
+            /*CargarDatos();               
+            CargarGraficoTiposSangre();  */
+             // Mostrar todos los datos al iniciar
+    CargarDatos();
+    CargarGraficoTiposSangre();
+    label3.Text = "Seleccione un tipo de sangre para filtrar";
+
+
+           
+
         }
 
-      
+
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(comboBox1.Text))
             {
+                // Solo actualiza el label con el total
+                ActualizarLabelTotal(comboBox1.Text);
+
+                // Agrega la nueva columna a la gráfica (sin borrar las existentes)
+                CargarGraficoTipoSangreUnico(comboBox1.Text);
+
+                // Opcional: Filtrar el DataGridView
+                CargarDatosFiltrados(comboBox1.Text);
+                
+            }
+        }
+
+        private void ActualizarLabelTotal(string tipoSangre)
+        {
+            try
+            {
                 using (SqlConnection conexion = new SqlConnection(conexionString))
                 {
-                    try
+                    conexion.Open();
+                    string query = "SELECT SUM(MILILITROS_D) FROM Sangre WHERE T_SANGRE = @TipoSangre";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conexion))
                     {
-                        conexion.Open();
-                        string query = "SELECT SUM(MILILITROS_D) FROM Sangre WHERE T_SANGRE = @TipoSangre"; // Asegúrate de que T_SANGRE sea el nombre correcto de la columna
-                        using (SqlCommand cmd = new SqlCommand(query, conexion))
+                        cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
+                        object resultado = cmd.ExecuteScalar();
+
+                        if (resultado != null && resultado != DBNull.Value)
                         {
-                            cmd.Parameters.AddWithValue("@TipoSangre", comboBox1.Text);
-
-                            object resultado = cmd.ExecuteScalar();
-
-                            if (resultado != DBNull.Value && resultado != null)
-                            {
-                                int totalMililitros = Convert.ToInt32(resultado);
-                                label3.Text = "La cantidad de Mililitros total es de: " + totalMililitros.ToString();
-
-                                // **** ATENCIÓN AQUÍ ****
-                                // Parece que 'grafic' es un Label que usabas para una representación de texto.
-                                // Ya no lo necesitas si estás usando el Chart.
-                                // Si 'grafic' es el Chart, entonces su nombre está mal escrito aquí.
-                                // Asumo que quieres actualizar la gráfica 'grafica' con el tipo seleccionado.
-                                // Por favor, verifica el nombre de tu control Label o elimina estas líneas si 'grafic' no existe o no es necesario.
-                                if (grafica != null) // Solo si 'grafic' es un Label que aún quieres usar
-                                {
-                                    grafica.Text = ""; // Limpia el Label
-                                    // Esta lógica es para un Label que simula barras, no para el control Chart.
-                                    // for (int i = 1; i <= totalMililitros / 50; i++)
-                                    // {
-                                    //     grafic.Text += "│ ";
-                                    // }
-                                }
-                            }
-                            else
-                            {
-                                label3.Text = "No se tiene Sangre de este tipo de sangre";
-                                if (grafica != null) grafica.Text = ""; // Limpiar el Label de texto
-                            }
+                            int totalMililitros = Convert.ToInt32(resultado);
+                            label3.Text = $"La cantidad de mililitros es de: {totalMililitros} ml";
+                        }
+                        else
+                        {
+                            label3.Text = $"No hay registros para el tipo {tipoSangre}";
                         }
                     }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show($"Error al consultar tipo de sangre: {ex.Message}", "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Error inesperado al seleccionar tipo de sangre: {ex.Message}", "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
-
-                // Actualizar el DataGridView con los datos filtrados
-                CargarDatosFiltrados(comboBox1.Text);
-                // Cargar el gráfico para mostrar solo el tipo de sangre seleccionado:
-                CargarGraficoTipoSangreUnico(comboBox1.Text);
             }
-            else
+            catch (Exception ex)
             {
-                label3.Text = "";
-                // Si el ComboBox se vacía, vuelve a cargar todos los datos en DataGridView y Chart
-                CargarDatos();
-                CargarGraficoTiposSangre();
+                label3.Text = "Error al calcular el total";
+                MessageBox.Show($"Error al obtener mililitros: {ex.Message}");
             }
         }
 
@@ -240,44 +228,43 @@ namespace Proyecto_Banco_De_Sangre
 
         private void CargarGraficoTipoSangreUnico(string tipoSangre)
         {
-            grafica.Series.Clear();
-            Series serieUnica = grafica.Series.Add("Mililitros de " + tipoSangre);
-            serieUnica.ChartType = SeriesChartType.Column;
-            serieUnica.IsValueShownAsLabel = true;
-
-            try
+            // Verifica si ya existe una serie para este tipo de sangre
+            if (grafica.Series.IndexOf(tipoSangre) == -1)
             {
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-                {
-                    conexion.Open();
-                    string query = "SELECT SUM(MILILITROS_D) AS TotalMililitros FROM Sangre WHERE T_SANGRE = @TipoSangre GROUP BY T_SANGRE";
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
-                    {
-                        cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
-                        object resultado = cmd.ExecuteScalar();
+                // Crea una nueva serie si no existe
+                Series nuevaSerie = grafica.Series.Add(tipoSangre);
+                nuevaSerie.ChartType = SeriesChartType.Column;
+                nuevaSerie.IsValueShownAsLabel = true;
 
-                        if (resultado != DBNull.Value && resultado != null)
+                try
+                {
+                    using (SqlConnection conexion = new SqlConnection(conexionString))
+                    {
+                        conexion.Open();
+                        string query = "SELECT SUM(MILILITROS_D) AS Total FROM Sangre WHERE T_SANGRE = @TipoSangre";
+                        using (SqlCommand cmd = new SqlCommand(query, conexion))
                         {
-                            int totalMililitros = Convert.ToInt32(resultado);
-                            serieUnica.Points.AddXY(tipoSangre, totalMililitros);
-                        }
-                        else
-                        {
-                            //   MessageBox.Show($"No hay datos de donación para el tipo de sangre {tipoSangre}.", "Sin Datos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            cmd.Parameters.AddWithValue("@TipoSangre", tipoSangre);
+                            object resultado = cmd.ExecuteScalar();
+
+                            if (resultado != DBNull.Value && resultado != null)
+                            {
+                                int total = Convert.ToInt32(resultado);
+                                nuevaSerie.Points.AddXY(tipoSangre, total);
+                            }
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al cargar {tipoSangre}: {ex.Message}");
+                }
             }
-            catch (SqlException ex)
+            else
             {
-                MessageBox.Show($"Error al cargar el gráfico para el tipo de sangre único: {ex.Message}", "Error de Base de Datos", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error inesperado al cargar el gráfico para el tipo de sangre único: {ex.Message}", "Error Inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"El tipo {tipoSangre} ya está en la gráfica");
             }
         }
-
         // Clases de informes (no relacionadas directamente con la gráfica pero parte de tu código)
         public class Registro
         {
@@ -304,7 +291,6 @@ namespace Proyecto_Banco_De_Sangre
 
         private void dtw_Informes_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Evento para el DataGridView, puedes dejarlo vacío si no haces nada aquí
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -419,11 +405,19 @@ namespace Proyecto_Banco_De_Sangre
 
         private void button2_Click(object sender, EventArgs e)
         {
-            CargarDatos();
+         
+
+            // Limpiar y mostrar todos los tipos
+            grafica.Series.Clear();
             CargarGraficoTiposSangre();
+            CargarDatos();
+            label3.Text = "Visualizando todos los tipos de sangre";
+
         }
 
-        private void grafica_Click(object sender, EventArgs e)
+
+
+            private void grafica_Click(object sender, EventArgs e)
         {
 
         }
@@ -431,6 +425,12 @@ namespace Proyecto_Banco_De_Sangre
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+
+        }
+
+        private void comboBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+                        e.Handled = true;
 
         }
     }

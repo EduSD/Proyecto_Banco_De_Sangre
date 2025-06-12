@@ -102,252 +102,126 @@ namespace Proyecto_Banco_De_Sangre
 
         {
 
-
-            try
-
-            {
-
-                string nombreDonante = txtnombre.Text;
-
-                int litrosDonados = int.Parse(txtlitros2.Text);
-
-                DateTime fechaDonacion = DateTime.Today;
-
-                int edad = int.Parse(txtedad.Text);
-
-                string sangre = txtsangre.Text;
-
-
-
-                int fn = int.Parse(txtedad.Text);
-
-                int fa = Convert.ToInt32(DateTime.Now.ToString("yyyy"));
-
-                int d = fa - fn;
-
-
-
-
-
-                if (d < 17)
-
-                {
-
-                    errorProvider4.SetError(txtedad, "No puedes donar si tienes menos de 17 años");
-
-                    return; // Detener la ejecución del método
-
-                }
-
-                else
-
-                {
-
-                    errorProvider4.Clear();
-
-                }
-
-
-
-
-
-                // Validación de cantidad de litros donados
-
-                if (litrosDonados > 450)
-
-                {
-
-                    errorProvider3.SetError(txtlitros2, "El paciente no puede donar mas de 450 mililitros de sangre");
-
-
-
-                    return;
-
-                }
-
-
-
-                // Validación del tiempo entre donaciones
-
-                if (!PuedeDonar(nombreDonante, fechaDonacion))
-
-                {
-
-                    MessageBox.Show("No puedes donar sangre hasta que hayan pasado 64 días desde tu última donación.");
-
-                    return;
-
-                }
-
-
-
-                using (SqlConnection conexion = new SqlConnection(conexionString))
-
-                {
-
-                    conexion.Open();
-
-
-
-                    // Insertar en la tabla Registros
-
-                    string queryInsertRegistros = "INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
-
-                    using (SqlCommand cmd = new SqlCommand(queryInsertRegistros, conexion))
-
-                    {
-
-                        cmd.Parameters.AddWithValue("@NOMBRE_C", txtnombre.Text);
-
-                        cmd.Parameters.AddWithValue("@EDAD", txtedad.Text);
-
-                        cmd.Parameters.AddWithValue("@T_SANGRE", txtsangre.Text);
-
-                        cmd.Parameters.AddWithValue("@MILILITROS_D", int.Parse(txtlitros2.Text));
-
-                        cmd.Parameters.AddWithValue("@FECHA_D", DateTime.Today);
-
-                        cmd.ExecuteNonQuery();
-
-                    }
-
-
-
-                    // Insertar en la tabla Sangre desde Registros
-
-                    string queryInsertSangre = @"
-
-                INSERT INTO Sangre (T_SANGRE, MILILITROS_D, FECHA_D, ESTATUS)
-
-                SELECT T_SANGRE, MILILITROS_D, FECHA_D, 
-
-                    CASE 
-
-                        WHEN DATEDIFF(DAY, FECHA_D, GETDATE()) > 42 THEN 'Caducada'
-
-                        ELSE 'Disponible'
-
-                    END 
-
-                FROM Registros 
-
-                WHERE NOMBRE_C = @NOMBRE_C AND FECHA_D = @FECHA_D";
-
-
-
-                    using (SqlCommand cmdSangre = new SqlCommand(queryInsertSangre, conexion))
-
-                    {
-
-                        cmdSangre.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
-
-                        cmdSangre.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
-
-                        cmdSangre.ExecuteNonQuery();
-
-                    }
-
-                }
-
-
-
-                CargarDatos();
-
+            
+                // Limpiar errores previos
                 errorProvider1.Clear();
-
-            }
-
-
-
-            catch (SqlException ex)
-
-            {
-
-                MessageBox.Show($"Error en la base de datos: {ex.Message}");
-
-            }
-
-            catch (Exception ex)
-
-            {
-
-                errorProvider1.SetError(txtnombre, "El Campo con el nombre no debe de permanecer vacio");
-
-                errorProvider2.SetError(txtsangre, "Favor de seleccionar un tipo de sangre de las opciones presentadas");
-
-
-
-            }
-
-
-
-
-            if (txtedad.Text == " ")
-
-            {
-
-                errorProvider4.SetError(txtedad, "Favor de no dejar el campo vacio");
-
-            }
-
-            if (txtlitros2.Text == " ")
-
-            {
-
-                errorProvider5.SetError(txtlitros2, "Favor de llenar el campo");
-
-            }
-         
-
-
-
-
-
-            if (txtnombre.Text != " ")
-
-            {
-
-                errorProvider1.Clear();
-
-            }
-
-            if (txtsangre.Text != " ")
-
-            {
-
                 errorProvider2.Clear();
-
-            }
-
-            if (txtlitros2.Text != " ")
-
-            {
-
                 errorProvider3.Clear();
-
+                errorProvider4.Clear();
                 errorProvider5.Clear();
 
-            }
+                // Validar campos vacíos ANTES de procesar
+                if (string.IsNullOrWhiteSpace(txtnombre.Text))
+                {
+                    errorProvider1.SetError(txtnombre, "El nombre no puede estar vacío");
+                    return;
+                }
 
-            if (txtedad.Text != " ")
+                if (string.IsNullOrWhiteSpace(txtsangre.Text))
+                {
+                    errorProvider2.SetError(txtsangre, "Seleccione un tipo de sangre");
+                    return;
+                }
 
-            {
+                if (string.IsNullOrWhiteSpace(txtedad.Text))
+                {
+                    errorProvider4.SetError(txtedad, "La edad no puede estar vacía");
+                    return;
+                }
 
-                errorProvider4.Clear();
+                if (string.IsNullOrWhiteSpace(txtlitros2.Text))
+                {
+                    errorProvider5.SetError(txtlitros2, "Ingrese los mililitros donados");
+                    return;
+                }
 
-            }
+                // Validaciones de formato y lógica
+                try
+                {
+                    string nombreDonante = txtnombre.Text;
+                    int litrosDonados = int.Parse(txtlitros2.Text);
+                    int edad = int.Parse(txtedad.Text);
+                    string sangre = txtsangre.Text;
+                    DateTime fechaDonacion = DateTime.Today;
 
+                    // Validar edad mínima (17 años)
+                    int añoNacimiento = int.Parse(txtedad.Text);
+                    int añoActual = DateTime.Now.Year;
+                    int edadCalculada = añoActual - añoNacimiento;
 
+                    if (edadCalculada < 17)
+                    {
+                        errorProvider4.SetError(txtedad, "No puedes donar si tienes menos de 17 años");
+                        return;
+                    }
 
-            if (txtnombre.Text != " " && txtedad.Text != " " && txtsangre.Text != " " && txtlitros2.Text != " ")
+                    // Validar litros máximos (450 ml)
+                    if (litrosDonados > 450)
+                    {
+                        errorProvider3.SetError(txtlitros2, "No se pueden donar más de 450 ml");
+                        return;
+                    }
 
-            {
+                    // Validar tiempo entre donaciones
+                    if (!PuedeDonar(nombreDonante, fechaDonacion))
+                    {
+                        MessageBox.Show("Deben pasar 64 días desde tu última donación.");
+                        return;
+                    }
 
-                limpiar();
+                    // Insertar en la base de datos (solo si todas las validaciones pasan)
+                    using (SqlConnection conexion = new SqlConnection(conexionString))
+                    {
+                        conexion.Open();
 
+                        // Insertar en Registros
+                        string queryRegistros = @"INSERT INTO Registros(NOMBRE_C, EDAD, T_SANGRE, MILILITROS_D, FECHA_D) 
+                                    VALUES(@NOMBRE_C, @EDAD, @T_SANGRE, @MILILITROS_D, @FECHA_D)";
+                        using (SqlCommand cmd = new SqlCommand(queryRegistros, conexion))
+                        {
+                            cmd.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
+                            cmd.Parameters.AddWithValue("@EDAD", edad);
+                            cmd.Parameters.AddWithValue("@T_SANGRE", sangre);
+                            cmd.Parameters.AddWithValue("@MILILITROS_D", litrosDonados);
+                            cmd.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
+                            cmd.ExecuteNonQuery();
+                        }
 
-            }
+                        // Insertar en Sangre
+                        string querySangre = @"INSERT INTO Sangre (T_SANGRE, MILILITROS_D, FECHA_D, ESTATUS)
+                                SELECT T_SANGRE, MILILITROS_D, FECHA_D, 
+                                    CASE 
+                                        WHEN DATEDIFF(DAY, FECHA_D, GETDATE()) > 42 THEN 'Caducada'
+                                        ELSE 'Disponible'
+                                    END 
+                                FROM Registros 
+                                WHERE NOMBRE_C = @NOMBRE_C AND FECHA_D = @FECHA_D";
+                        using (SqlCommand cmdSangre = new SqlCommand(querySangre, conexion))
+                        {
+                            cmdSangre.Parameters.AddWithValue("@NOMBRE_C", nombreDonante);
+                            cmdSangre.Parameters.AddWithValue("@FECHA_D", fechaDonacion);
+                            cmdSangre.ExecuteNonQuery();
+                        }
+                    }
 
+                    // Limpiar campos y actualizar datos
+                    limpiar();
+                    CargarDatos();
+                    MessageBox.Show("Registro agregado exitosamente.");
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Verifica que los campos numéricos (edad/litros) contengan valores válidos.");
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show($"Error de base de datos: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error inesperado: {ex.Message}");
+                }
+            
 
 
 

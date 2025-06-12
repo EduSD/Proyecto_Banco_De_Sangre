@@ -37,6 +37,8 @@ namespace Proyecto_Banco_De_Sangre
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.dtw_Informes = new System.Windows.Forms.DataGridView();
+            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sangreBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.banco_sangreDataSet1 = new Proyecto_Banco_De_Sangre.banco_sangreDataSet1();
             this.bancosangreDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -50,8 +52,6 @@ namespace Proyecto_Banco_De_Sangre
             this.grafica = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.tSangreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblFechaHora = new System.Windows.Forms.ToolStripStatusLabel();
@@ -80,7 +80,6 @@ namespace Proyecto_Banco_De_Sangre
             // comboBox1
             // 
             this.comboBox1.BackColor = System.Drawing.Color.White;
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
@@ -98,6 +97,7 @@ namespace Proyecto_Banco_De_Sangre
             this.comboBox1.Size = new System.Drawing.Size(169, 28);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox1_KeyPress);
             // 
             // dtw_Informes
             // 
@@ -116,6 +116,22 @@ namespace Proyecto_Banco_De_Sangre
             this.dtw_Informes.RowTemplate.Height = 24;
             this.dtw_Informes.Size = new System.Drawing.Size(482, 327);
             this.dtw_Informes.TabIndex = 3;
+            // 
+            // tSangreDataGridViewTextBoxColumn
+            // 
+            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
+            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
+            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
+            this.tSangreDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "MILILITROS_D";
+            this.Column1.HeaderText = "Cantidad Disponible de Sangre";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 125;
             // 
             // sangreBindingSource
             // 
@@ -220,22 +236,6 @@ namespace Proyecto_Banco_De_Sangre
             this.button3.Text = "Generar \r\nreporte";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
-            // 
-            // tSangreDataGridViewTextBoxColumn
-            // 
-            this.tSangreDataGridViewTextBoxColumn.DataPropertyName = "T_Sangre";
-            this.tSangreDataGridViewTextBoxColumn.HeaderText = "Tipo de Sangre";
-            this.tSangreDataGridViewTextBoxColumn.MinimumWidth = 6;
-            this.tSangreDataGridViewTextBoxColumn.Name = "tSangreDataGridViewTextBoxColumn";
-            this.tSangreDataGridViewTextBoxColumn.Width = 125;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "MILILITROS_D";
-            this.Column1.HeaderText = "Cantidad Disponible de Sangre";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 125;
             // 
             // timer1
             // 

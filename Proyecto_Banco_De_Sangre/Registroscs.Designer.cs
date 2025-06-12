@@ -324,9 +324,10 @@ namespace Proyecto_Banco_De_Sangre
             this.txtlitros2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtlitros2.Location = new System.Drawing.Point(691, 62);
             this.txtlitros2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtlitros2.MaxLength = 3;
             this.txtlitros2.Name = "txtlitros2";
             this.txtlitros2.Size = new System.Drawing.Size(76, 27);
-            this.txtlitros2.TabIndex = 3;
+            this.txtlitros2.TabIndex = 0;
             // 
             // txtID
             // 
